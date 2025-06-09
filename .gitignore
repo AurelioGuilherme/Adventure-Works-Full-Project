@@ -1,0 +1,6 @@
+/venv
+/.meltano
+.env
+.venv
+/extract/*
+!/extract/.gitkeep
