@@ -18,9 +18,9 @@ services:
       meltano-install:
         condition: service_completed_successfully
 
-  # meltano-run-db-extract:
-  #   <<: *meltano-image
-  #   command: run extraction_db
-  #   depends_on:
-  #     meltano-install:
-  #       condition: service_completed_successfully
+  meltano-run-db-extract:
+    <<: *meltano-image
+    command: run extraction_db
+    depends_on:
+      meltano-install:
+        condition: service_completed_successfully
