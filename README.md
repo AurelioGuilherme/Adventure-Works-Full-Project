@@ -1,13 +1,26 @@
 # aw-checkpoint2
 
-Projeto de teste para a execução do checkpoint 2
+Projeto de teste para execução do checkpoint 2.
 
 ## Execução geral do projeto
 
-* 1 - Ambiente Vitual Python
-Criação do ambiente virtual python `venv`
-python3 -m venv .venv
+### 1. Criar o ambiente virtual Python
 
-Iniciando o ambiente virtual
-.venv/bin/activate  # Linux
-.venv/Scripts/activate  # Windows
+Execute o comando no terminal para criar o ambiente virtual:
+
+```bash
+python3 -m venv .venv
+```
+
+### 2. Ative o ambiente virtual
+
+Comando **linux** para ativar o ambiente virtual.
+```bash
+source .venv/bin/activate  
+```
+
+Comando **Windows** para ativar o ambiente virtual.
+```bash
+.venv/Scripts/activate  
+```
+
