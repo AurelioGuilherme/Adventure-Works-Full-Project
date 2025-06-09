@@ -1,0 +1,12 @@
+x-meltano-image: &meltano-image
+  image: meltano/meltano
+  working_dir: /project
+  volumes:
+    - .:/project
+  env_file:
+    - .env
+    
+services:
+  meltano-run:
+    <<: *meltano-image
+    command: run tap-mssql target-parquet
