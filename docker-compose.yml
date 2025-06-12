@@ -5,8 +5,22 @@ x-meltano-image: &meltano-image
     - .:/project
   env_file:
     - .env
-    
+
 services:
-  meltano-run:
+  meltano-install:
     <<: *meltano-image
-    command: run tap-mssql target-parquet
+    command: install
+
+  meltano-run-api-extract:
+    <<: *meltano-image
+    command: run extraction_api
+    depends_on:
+      meltano-install:
+        condition: service_completed_successfully
+
+  # meltano-run-db-extract:
+  #   <<: *meltano-image
+  #   command: run extraction_db
+  #   depends_on:
+  #     meltano-install:
+  #       condition: service_completed_successfully
