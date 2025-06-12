@@ -2,5 +2,5 @@
 /.meltano
 .env
 .venv
-/extract/*
-!/extract/.gitkeep
+/output/*
+!/output/.gitkeep

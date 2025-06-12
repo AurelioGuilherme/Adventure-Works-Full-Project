@@ -1,0 +1,84 @@
+{
+    "type": "object",
+    "required": [],
+    "properties": {
+        "PurchaseOrderID": {
+            "type": [
+                "number",
+                "null"
+            ]
+        },
+        "RevisionNumber": {
+            "type": [
+                "number",
+                "null"
+            ]
+        },
+        "Status": {
+            "type": [
+                "number",
+                "null"
+            ]
+        },
+        "EmployeeID": {
+            "type": [
+                "number",
+                "null"
+            ]
+        },
+        "VendorID": {
+            "type": [
+                "number",
+                "null"
+            ]
+        },
+        "ShipMethodID": {
+            "type": [
+                "number",
+                "null"
+            ]
+        },
+        "OrderDate": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "SubTotal": {
+            "type": [
+                "number",
+                "null"
+            ]
+        },
+        "TaxAmt": {
+            "type": [
+                "number",
+                "null"
+            ]
+        },
+        "Freight": {
+            "type": [
+                "number",
+                "null"
+            ]
+        },
+        "TotalDue": {
+            "type": [
+                "number",
+                "null"
+            ]
+        },
+        "ModifiedDate": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "ShipDate": {
+            "type": [
+                "string",
+                "null"
+            ]
+        }
+    }
+}

@@ -1,0 +1,72 @@
+{
+    "type": "object",
+    "required": [],
+    "properties": {
+        "PurchaseOrderID": {
+            "type": [
+                "number",
+                "null"
+            ]
+        },
+        "PurchaseOrderDetailID": {
+            "type": [
+                "number",
+                "null"
+            ]
+        },
+        "DueDate": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "OrderQty": {
+            "type": [
+                "number",
+                "null"
+            ]
+        },
+        "ProductID": {
+            "type": [
+                "number",
+                "null"
+            ]
+        },
+        "UnitPrice": {
+            "type": [
+                "number",
+                "null"
+            ]
+        },
+        "LineTotal": {
+            "type": [
+                "number",
+                "null"
+            ]
+        },
+        "ReceivedQty": {
+            "type": [
+                "number",
+                "null"
+            ]
+        },
+        "RejectedQty": {
+            "type": [
+                "number",
+                "null"
+            ]
+        },
+        "StockedQty": {
+            "type": [
+                "number",
+                "null"
+            ]
+        },
+        "ModifiedDate": {
+            "type": [
+                "string",
+                "null"
+            ]
+        }
+    }
+}

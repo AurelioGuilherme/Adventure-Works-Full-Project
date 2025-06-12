@@ -1,12 +1,64 @@
 version: 1
 default_environment: dev
-project_id: e5b51675-739c-4436-9e87-63c2f7006d80
+project_id: 83c0518b-24d3-464e-b1c1-c6884c683209
+
 environments:
 - name: dev
 - name: staging
 - name: prod
+
 plugins:
   extractors:
+  - name: tap-rest-api-msdk
+    variant: widen
+    pip_url: tap-rest-api-msdk
+    config:
+      api_url: ${TAP_REST_API_MSDK_API_URL}
+      username: ${TAP_REST_API_MSDK_USERNAME}
+      auth_method: basic
+      flattening_enabled: false
+
+      pagination_request_style: simple_offset_paginator
+      pagination_response_style: offset
+      pagination_limit_per_page_param: limit
+      pagination_next_page_param: offset
+      pagination_total_limit_param: total
+      pagination_initial_offset: 0
+      pagination_page_size: 20000
+      offset_records_jsonpath: $.data
+
+      streams:
+      - name: purchaseorderdetail
+        path: /PurchaseOrderDetail
+        primary_keys: [PurchaseOrderDetailID]
+        records_path: $.data[*]
+        schema: ./schemas/purchaseorderdetail.json
+
+
+      - name: salesorderdetail
+        path: /SalesOrderDetail
+        primary_keys: [SalesOrderDetailID]
+        records_path: $.data[*]
+        schema: ./schemas/salesorderdetail.json
+
+
+      - name: salesorderheader
+        path: /SalesOrderHeader
+        primary_keys: [SalesOrderID]
+        records_path: $.data[*]
+        schema: ./schemas/salesorderheader.json
+
+
+      - name: purchaseorderheader
+        path: /PurchaseOrderHeader
+        primary_keys: [PurchaseOrderID]
+        records_path: $.data[*]
+        schema: ./schemas/purchaseorderheader.json
+ 
+
+    select:
+    - '*.*'
+
   - name: tap-mssql
     variant: buzzcutnorman
     pip_url: git+https://github.com/BuzzCutNorman/tap-mssql.git
@@ -16,9 +68,29 @@ plugins:
       host: ${TAP_MSSQL_HOST}
       port: ${TAP_MSSQL_PORT}
       database: ${TAP_MSSQL_DATABASE}
+
   loaders:
-  - name: target-parquet
+  - name: target-parquet-api
+    inherit_from: target-parquet
     variant: automattic
     pip_url: git+https://github.com/Automattic/target-parquet.git
     config:
-      destination_path: ./extract
+      destination_path: ./output/api_data_raw
+
+  - name: target-parquet-db
+    inherit_from: target-parquet
+    variant: automattic
+    pip_url: git+https://github.com/Automattic/target-parquet.git
+    config:
+      destination_path: ./output/db_data_raw
+
+
+
+jobs:
+- name: extraction_api
+  tasks:
+  - tap-rest-api-msdk target-parquet-api
+
+- name: extraction_db
+  tasks:
+  - tap-mssql target-parquet-db
