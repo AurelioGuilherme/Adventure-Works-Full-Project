@@ -1,16 +1,29 @@
+# Imagem Docker Databricks CLI
+x-databricks-cli-image: &databricks-cli-image
+  image: ghcr.io/databricks/cli@sha256:2cd78b49a0704d7473b3c44d4ea32ba395caf0a47bed49a477ef9b396d684f46
+  working_dir: /project
+  volumes:
+    - .:/project
+  env_file:
+    - .env  
+
+# Imagem Docker Meltano
 x-meltano-image: &meltano-image
-  image: meltano/meltano
+  image: meltano/meltano@sha256:73b7a59e1064a6c1a64b643befa6b8b8124207fae0effd7d224e6fa71f1f30ef
   working_dir: /project
   volumes:
     - .:/project
   env_file:
     - .env
 
+# Orquestração de containers
 services:
+  #Instalação das taps e targets
   meltano-install:
     <<: *meltano-image
     command: install
 
+  # Execução ta extração da API com o Meltano
   meltano-run-api-extract:
     <<: *meltano-image
     command: run extraction_api
@@ -18,9 +31,30 @@ services:
       meltano-install:
         condition: service_completed_successfully
 
+  # Execução ta extração do banco de dados com o Meltano
   meltano-run-db-extract:
     <<: *meltano-image
     command: run extraction_db
     depends_on:
       meltano-install:
         condition: service_completed_successfully
+
+
+  # Ingestão dos arquivos parquet extraidos no Databricks 
+  databricks-ingestion:
+    <<: *databricks-cli-image
+    command: fs cp --recursive ./output/raw dbfs:/Volumes/${DATABRICKS_CATALOG}/${DATABRICKS_CATALOG_SCHEMA}/${DATABRICKS_PATH}
+  depends_on:
+    meltano-run-db-extract:
+      condition: service_completed_successfully
+    meltano-run-api-extract:
+      condition: service_completed_successfully
+
+  # Execução do job de transformação em tabela delta
+  databricks-job-run-parquet-to-delta:
+    <<: *databricks-cli-image
+    command: jobs run-now ${DATABRICKS_JOB_ID}
+    depends_on:
+      databricks-ingestion:
+        condition: service_completed_successfully
+

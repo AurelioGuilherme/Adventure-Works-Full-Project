@@ -1,7 +1,6 @@
 version: 1
 default_environment: dev
 project_id: 83c0518b-24d3-464e-b1c1-c6884c683209
-
 environments:
 - name: dev
 - name: staging
@@ -9,57 +8,68 @@ environments:
 
 plugins:
   extractors:
-  - name: tap-rest-api-msdk
+  # Tap de extração da API
+  - name: tap-rest-api-msdk   # https://hub.meltano.com/extractors/tap-rest-api-msdk/
     variant: widen
     pip_url: tap-rest-api-msdk
+
+    # Configurações de acesso
     config:
       api_url: ${TAP_REST_API_MSDK_API_URL}
       username: ${TAP_REST_API_MSDK_USERNAME}
       auth_method: basic
-      flattening_enabled: false
 
+      # Configurações de paginação e compactação
       pagination_request_style: simple_offset_paginator
       pagination_response_style: offset
       pagination_limit_per_page_param: limit
       pagination_next_page_param: offset
       pagination_total_limit_param: total
       pagination_initial_offset: 0
-      pagination_page_size: 20000
+      pagination_page_size: 10000
       offset_records_jsonpath: $.data
+      flattening_enabled: false
 
       streams:
+      # Endpoint PurchaseOrderDetail
       - name: purchaseorderdetail
         path: /PurchaseOrderDetail
         primary_keys: [PurchaseOrderDetailID]
+        replication_key: ModifiedDate
+        replication_method: INCREMENTAL
         records_path: $.data[*]
         schema: ./schemas/purchaseorderdetail.json
 
-
+      # Endpoint SalesOrderDetail
       - name: salesorderdetail
         path: /SalesOrderDetail
         primary_keys: [SalesOrderDetailID]
         records_path: $.data[*]
         schema: ./schemas/salesorderdetail.json
 
-
+      # Endpoint SalesOrderHeader
       - name: salesorderheader
         path: /SalesOrderHeader
         primary_keys: [SalesOrderID]
+        replication_key: ModifiedDate
+        replication_method: INCREMENTAL
         records_path: $.data[*]
         schema: ./schemas/salesorderheader.json
 
-
+      # Endpoint PurchaseOrderHeader
       - name: purchaseorderheader
         path: /PurchaseOrderHeader
         primary_keys: [PurchaseOrderID]
+        replication_key: ModifiedDate
+        replication_method: INCREMENTAL
         records_path: $.data[*]
         schema: ./schemas/purchaseorderheader.json
- 
 
     select:
     - '*.*'
 
-  - name: tap-mssql
+  # Tap de extração do banco de dados
+  - name: tap-mssql  # https://hub.meltano.com/extractors/tap-mssql/
     variant: buzzcutnorman
     pip_url: git+https://github.com/BuzzCutNorman/tap-mssql.git
     config:
@@ -70,27 +80,35 @@ plugins:
       database: ${TAP_MSSQL_DATABASE}
 
   loaders:
-  - name: target-parquet-api
-    inherit_from: target-parquet
+  # Target Parquet para API
+  - name: target-parquet-api 
+    inherit_from: target-parquet # https://hub.meltano.com/loaders/target-parquet/
     variant: automattic
     pip_url: git+https://github.com/Automattic/target-parquet.git
-    config:
-      destination_path: ./output/api_data_raw
 
+    # Configuração de pasta
+    config:
+      destination_path: ./output/raw/api_data
+
+  # Target Parquet para o Banco de dados
   - name: target-parquet-db
-    inherit_from: target-parquet
+    inherit_from: target-parquet  # https://hub.meltano.com/loaders/target-parquet/
     variant: automattic
     pip_url: git+https://github.com/Automattic/target-parquet.git
+
+    # Configuração de pasta
     config:
-      destination_path: ./output/db_data_raw
+      destination_path: ./output/raw/db_data
 
 
 
 jobs:
+# Job para extrair dados da API e salvar em arquivos Parquet
 - name: extraction_api
   tasks:
   - tap-rest-api-msdk target-parquet-api
 
+# Job para extrair dados do banco de dados MSSQL e salvar em arquivos Parquet
 - name: extraction_db
   tasks:
   - tap-mssql target-parquet-db
