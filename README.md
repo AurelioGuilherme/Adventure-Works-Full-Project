@@ -15,23 +15,25 @@ No projeto é contem a conteinerização com **Docker**, extração com **Meltan
 
 **Estrutura de pastas**
 
+```shell
 aw-checkpoint2/
-├── .env.example                    # Exemplo de variáveis de ambiente
-├── .gitignore                      # Arquivos ignorados pelo Git
-├── README.md                       # Documentação do projeto
-├── docker-compose.yml              # Pipeline de execuçao de extração e ingestão com o Docker Compose
-├── meltano.yml                     # Configurações do Meltano para extração
-├── plugins/                        # Plugins Meltano
-│    ├── extractors/                # Configurações da tap
-│    └──  loaders/                  # Configurações dos targets
-├── Notebook/                       # Notebooks do Databricks
-│   └── convert_parquet_to_delta.ipynb
-├── output/                         # Dados extraídos (Parquet)
-└── schemas/                        # Schemas de extração Meltano API
+├── .env.example                  # Exemplo das variáveis de ambiente utilizadas no projeto
+├── .gitignore                    # Define os arquivos e pastas ignorados pelo Git
+├── README.md                     # Documentação principal do projeto
+├── docker-compose.yml            # Pipeline de extração e ingestão usando Docker Compose
+├── meltano.yml                   # Arquivo de configuração do Meltano
+├── plugins/                      # Diretório contendo os plugins do Meltano
+│   ├── extractors/               # Configurações das taps (fontes de dados)
+│   └── loaders/                  # Configurações dos targets (destinos dos dados)
+├── Notebook/                     # Notebooks utilizados no Databricks
+│   └── convert_parquet_to_delta.ipynb  # Notebook para conversão de Parquet em Delta Table
+├── output/                       # Arquivos Parquet gerados após a extração
+└── schemas/                      # Schemas utilizados para validar os dados da API
     ├── purchaseorderdetail.json
     ├── purchaseorderheader.json
     ├── salesorderdetail.json
     └── salesorderheader.json
+```
 
 ## Arquitetura Geral do Projeto
 
