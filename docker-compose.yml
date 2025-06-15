@@ -39,6 +39,7 @@ services:
       meltano-install:
         condition: service_completed_successfully
 
+
   # Ingestão dos arquivos parquet extraidos no Databricks 
   databricks-ingestion:
     <<: *databricks-cli-image
@@ -56,3 +57,4 @@ services:
     depends_on:
       databricks-ingestion:
         condition: service_completed_successfully
+
