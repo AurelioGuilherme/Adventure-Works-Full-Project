@@ -97,12 +97,13 @@ DATABRICKS_JOB_ID=seu_job_id
 5 - Crie uma pasta com nome **`raw`** dentro do seu schema no Databricks. Essa pasta será utilizada para armazenar os arquivos Parquet extraídos antes da conversão para Delta Table.
 
 ### 4. Executar o Pipeline
-Com todas as configurações realizadas, execute o pipeline completo:
 
-Esteja com o terminal apontado para a pasta aw-checkpoint2
+Esteja com o terminal apontado para a pasta **aw-checkpoint2**
+
 ```bash
  cd aw-checkpoint2
 ```
+Com todas as configurações realizadas, execute o pipeline completo:
 ```bash
 docker-compose up
 ```
