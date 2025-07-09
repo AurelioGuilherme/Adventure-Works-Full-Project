@@ -44,11 +44,11 @@ services:
   databricks-ingestion:
     <<: *databricks-cli-image
     command: fs cp --recursive ./output/raw dbfs:/Volumes/${DATABRICKS_CATALOG}/${DATABRICKS_CATALOG_SCHEMA}/${DATABRICKS_PATH}
-  depends_on:
-    meltano-run-db-extract:
-      condition: service_completed_successfully
-    meltano-run-api-extract:
-      condition: service_completed_successfully
+    depends_on:
+      meltano-run-db-extract:
+        condition: service_completed_successfully
+      meltano-run-api-extract:
+        condition: service_completed_successfully
 
   # Execução do job de transformação em tabela delta
   databricks-job-run-parquet-to-delta:
