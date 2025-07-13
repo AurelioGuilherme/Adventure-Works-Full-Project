@@ -4,3 +4,9 @@
 .venv
 /output/*
 !/output/.gitkeep
+/logs/*
+!/logs/.gitkeep
+__pycache__
+/backlog
+/config/*
+!/config/.gitkeep

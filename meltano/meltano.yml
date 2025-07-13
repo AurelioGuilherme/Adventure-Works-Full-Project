@@ -12,6 +12,7 @@ plugins:
   - name: tap-rest-api-msdk   # https://hub.meltano.com/extractors/tap-rest-api-msdk/
     variant: widen
     pip_url: tap-rest-api-msdk
+    catalog: ./catalogs/catalog_tap_rest_api_msdk.json
 
     # Configurações de acesso
     config:
@@ -72,6 +73,7 @@ plugins:
   - name: tap-mssql  # https://hub.meltano.com/extractors/tap-mssql/
     variant: buzzcutnorman
     pip_url: git+https://github.com/BuzzCutNorman/tap-mssql.git
+    catalog: ./catalogs/catalog_tap_mssql.json
     config:
       user: ${TAP_MSSQL_USER}
       password: ${TAP_MSSQL_PASSWORD}
@@ -99,8 +101,6 @@ plugins:
     # Configuração de pasta
     config:
       destination_path: ./output/raw/db_data
-
-
 
 jobs:
 # Job para extrair dados da API e salvar em arquivos Parquet
