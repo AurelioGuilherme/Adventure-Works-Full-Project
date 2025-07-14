@@ -32,5 +32,9 @@ clean-targets:         # directories to be removed by `dbt clean`
 models:
   aw_project_dbt:
     # Config indicated by + and applies to all files under models/example/
-    example:
-      +materialized: view
+    01_staging:
+      materializated: ephemeral
+    02_intermediate:
+      materializated: table
+    03_marts:
+      materializated: table
