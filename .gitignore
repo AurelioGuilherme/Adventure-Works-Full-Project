@@ -10,3 +10,5 @@ __pycache__
 /backlog
 /config/*
 !/config/.gitkeep
+dbt/logs/dbt.log
+dbt/aw_project_dbt/.user.yml
