@@ -1,0 +1,15 @@
+version: 2
+
+sources:
+  - name: source_aw_api
+    catalog: ted_dev
+    schema: dev_aurelio_silva
+    tables:
+      - name: delta_raw_api_data_purchaseorderdetail
+        description: "A tabela armazena informações detalhadas dos pedidos de compra."
+
+      - name: delta_raw_api_data_purchaseorderheader
+        description: "A tabela armazena informações principais dos pedidos de compra"
+        
+      - name: delta_raw_api_data_salesorderheader
+        description: "A tabela armazena informações principais dos pedidos de venda."

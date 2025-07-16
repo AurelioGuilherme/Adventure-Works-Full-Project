@@ -1,0 +1,60 @@
+version: 2
+
+sources:
+  - name: source_aw_mssql
+    catalog: ted_dev
+    schema: dev_aurelio_silva
+    tables:
+      # Tabelas para Fato Vendas
+      - name: delta_raw_db_data_sales_salesorderdetail
+        description: "Detalhes dos pedidos de venda."
+
+      - name: delta_raw_db_data_sales_salesreason
+        description: "Tabela contendo os motivos de venda associados aos pedidos."
+
+      - name: delta_raw_db_data_sales_creditcard
+        description: "Tabela com informações de cartões de crédito utilizados em vendas."
+
+      - name: delta_raw_db_data_sales_salesterritory
+        description: "Informações sobre localização geografica das vendas."
+
+      - name: delta_raw_db_data_person_stateprovince
+        description: "Unidades federativas (estado/província) de endereços."
+
+      - name: delta_raw_db_data_sales_customer
+        description: "Informações dos clientes que realizaram pedidos."
+
+      - name: delta_raw_db_data_sales_salesperson
+        description: "Informações dos vendedores associados às vendas."
+
+      - name: delta_raw_db_data_person_person
+        description: "Cadastro de pessoas, incluindo funcionários e vendedores."
+
+      - name: delta_raw_db_data_person_address
+        description: "Endereços associados a clientes e pedidos."
+
+      - name: delta_raw_db_data_purchasing_shipmethod
+        description: "Métodos de envio utilizados na base de compras."
+
+      # Tabelas para Fato Estoque de Produtos
+      - name: delta_raw_db_data_production_transactionhistory
+        description: "Histórico de movimentações de estoque."
+
+      - name: delta_raw_db_data_production_transactionhistoryarchive
+        description: "Arquivo de movimentações de estoque."
+
+      - name: delta_raw_db_data_production_productcategory
+        description: "Categorias de produtos."
+
+      - name: delta_raw_db_data_production_productsubcategory
+        description: "Subcategorias de produtos."
+
+      - name: delta_raw_db_data_production_productinventory
+        description: "Níveis atuais de estoque por produto e local."
+
+      - name: delta_raw_db_data_production_location
+        description: "Locais físicos de armazenamento dos produtos."
+
+      # Tabelas comums entre fatos
+      - name: delta_raw_db_data_production_product
+        description: "Cadastro de produtos da base Production."
