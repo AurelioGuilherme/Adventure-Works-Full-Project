@@ -1,5 +1,5 @@
 with 
-    raw_purchase_order_header as (
+    purchase_order_header as (
         select 
             cast(PurchaseOrderID as int) as pk_purchase_order
             , cast(RevisionNumber as int) as fk_purchase_order_detail
@@ -11,11 +11,11 @@ with
             , cast(ShipDate as date) as received_qty 
             , cast(SubTotal as numeric(18, 4)) as rejected_qty
             , cast(TaxAmt as numeric(18, 4)) as stocked_qty  
-            , cast(Freight as numeric(18, 4)) as modified_date_dt
-            , cast(TotalDue as numeric(18, 4)) as modified_date_dt
+            , cast(Freight as numeric(18, 4)) as freight
+            , cast(TotalDue as numeric(18, 4)) as total_due
             , cast(ModifiedDate as date) as modified_date_dt
         from {{ source( 'source_aw_api', 'delta_raw_api_data_purchaseorderheader' ) }}
     )
 
 select *
-from raw_purchase_order_header
+from purchase_order_header
