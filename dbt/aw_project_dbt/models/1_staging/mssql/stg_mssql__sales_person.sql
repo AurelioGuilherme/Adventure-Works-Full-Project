@@ -1,5 +1,5 @@
 with
-    vendor as (
+    sales_person as (
         select
             cast(BusinessEntityID as int) as pk_vendor
             , cast(TerritoryID as int) as fk_territory_sales
@@ -14,4 +14,4 @@ with
     )
 
 select *
-from vendor
+from sales_person

@@ -1,7 +1,7 @@
 with
     sales_reason as (
         select 
-            cast(SalesReasonID as int) as pk_sales_reason
+            cast(SalesReasonID as int) as fk_sales_reason
             , cast(Name as string) as reason_name
             , cast(ReasonType as string) as reason_type
             , cast(ModifiedDate as date) as modified_date_dt

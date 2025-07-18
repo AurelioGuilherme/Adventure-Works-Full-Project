@@ -29,17 +29,17 @@ models:
     +generate_schema_name: generate_schema_name
 
     1_staging:
-      +schema: staging
       +catalog: "ted_dev"
-      +materialized: view
+      +schema: staging
+      +materialized: ephemeral
       
 
     2_intermediate:
-      +materialized: view
       +catalog: "ted_dev"
       +schema: "intermediate"
+      +materialized: table
 
     3_marts:
-      +materialized: table
-      +schema: "marts"
       +catalog: "ted_dev"
+      +schema: "marts"
+      +materialized: table

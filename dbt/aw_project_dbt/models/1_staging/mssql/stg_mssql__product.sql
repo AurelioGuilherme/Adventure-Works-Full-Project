@@ -1,7 +1,3 @@
-{{ config(
-    schema='staging'
-) }}
-
 with
     product as (
         select

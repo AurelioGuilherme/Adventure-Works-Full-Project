@@ -3,7 +3,7 @@ with
         select
             cast(BusinessEntityID as int) as pk_person
             , cast(PersonType as string) as person_type
-            , cast(NameStyle as boolean) as
+            , cast(NameStyle as boolean) as name_style
             , cast(Title as string) as title_name
             , cast(FirstName as string) as first_name
             , cast(MiddleName as string) as middle_name

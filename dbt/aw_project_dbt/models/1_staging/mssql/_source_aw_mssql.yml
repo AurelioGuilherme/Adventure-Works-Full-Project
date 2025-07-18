@@ -12,6 +12,9 @@ sources:
       - name: delta_raw_db_data_sales_salesreason
         description: "Tabela contendo os motivos de venda associados aos pedidos."
 
+      - name: delta_raw_db_data_sales_salesorderheadersalesreason
+        description: "Tabela que contem as referencias dos motivos da venda"
+
       - name: delta_raw_db_data_sales_creditcard
         description: "Tabela com informações de cartões de crédito utilizados em vendas."
 
