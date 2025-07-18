@@ -1,8 +1,8 @@
 with 
     purchase_order_detail as (
         select 
-            cast(PurchaseOrderID as int) as pk_purchase_order
-            , cast(PurchaseOrderDetailID as int) as fk_purchase_order_detail
+            cast(PurchaseOrderID as int) as fk_purchase_order
+            , cast(PurchaseOrderDetailID as int) as pk_purchase_order_detail
             , cast(DueDate as date) as due_date_dt
             , cast(OrderQty as int) as order_qty
             , cast(ProductID as int) as product_id

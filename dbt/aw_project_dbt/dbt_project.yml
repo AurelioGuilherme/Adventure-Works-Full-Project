@@ -26,12 +26,20 @@ clean-targets:         # directories to be removed by `dbt clean`
 # Configuring models
 models:
   aw_project_dbt:
-    01_staging:
-      +materialized: ephemeral
+    +generate_schema_name: generate_schema_name
+
+    1_staging:
+      +catalog: "ted_dev"
       +schema: staging
-    02_intermediate:
+      +materialized: ephemeral
+      
+
+    2_intermediate:
+      +catalog: "ted_dev"
+      +schema: "intermediate"
       +materialized: table
-      +schema: intermediate
-    03_marts:
+
+    3_marts:
+      +catalog: "ted_dev"
+      +schema: "marts"
       +materialized: table
-      +schema: marts
