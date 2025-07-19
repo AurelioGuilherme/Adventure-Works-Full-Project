@@ -26,6 +26,9 @@ sources:
 
       - name: delta_raw_db_data_sales_customer
         description: "Informações dos clientes que realizaram pedidos."
+      
+      - name: delta_raw_db_data_person_businessentityaddress
+        description: "Informações dos endereços das pessoas"
 
       - name: delta_raw_db_data_sales_salesperson
         description: "Informações dos vendedores associados às vendas."
