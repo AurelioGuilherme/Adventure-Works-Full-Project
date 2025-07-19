@@ -1,0 +1,64 @@
+version: 2
+
+models:
+  - name: int_sales_person_details
+    description: "Modelo intermediário que consolida os dados de vendedores, incluindo informações pessoais e desempenho de vendas."
+    columns:
+      - name: pk_person
+        data_type: int
+        description: "Chave primária que identifica de forma única o vendedor."
+        tests:
+          - unique
+          - not_null
+
+      - name: person_type
+        data_type: string
+        description: "Tipo de pessoa (ex: EM - funcionário, IN - indivíduo, SC - contato de loja)."
+
+      - name: name_style
+        data_type: boolean
+        description: "Indica se o nome está formatado no estilo oriental (true = sobrenome antes)."
+
+      - name: title_name
+        data_type: string
+        description: "Título formal do vendedor (Sr., Sra., Dr., etc.)."
+
+      - name: first_name
+        data_type: string
+        description: "Primeiro nome do vendedor."
+
+      - name: middle_name
+        data_type: string
+        description: "Nome do meio do vendedor."
+
+      - name: last_name
+        data_type: string
+        description: "Sobrenome do vendedor."
+
+      - name: suffix
+        data_type: string
+        description: "Sufixo do nome, como Jr., Sr., III, etc."
+
+      - name: fk_territory_sales
+        data_type: int
+        description: "Chave estrangeira que identifica o território de vendas."
+
+      - name: sales_yearly_quota
+        data_type: decimal(16,4)
+        description: "Meta anual de vendas atribuída ao vendedor."
+
+      - name: bonus_due
+        data_type: decimal(16,4)
+        description: "Valor de bônus a receber com base no desempenho."
+
+      - name: commission_sales_pct
+        data_type: decimal(6,4)
+        description: "Percentual de comissão sobre as vendas."
+
+      - name: sales_year_to_date
+        data_type: decimal(16,4)
+        description: "Valor total de vendas realizadas no ano corrente até a data atual."
+
+      - name: sales_last_year
+        data_type: decimal(16,4)
+        description: "Total de vendas realizadas pelo vendedor no ano anterior."

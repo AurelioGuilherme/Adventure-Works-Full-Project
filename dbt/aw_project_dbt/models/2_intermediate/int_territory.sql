@@ -57,9 +57,9 @@ with
             , ad.fk_state_province
             , ad.postal_code
         from  sales_territory as st
-        left join state_province as sp
+        inner join state_province as sp
             on st.pk_territory_sales = sp.fk_territory_sales
-        left join adress as ad
+        inner join adress as ad
             on sp.pk_state_province = ad.fk_state_province
     )
 

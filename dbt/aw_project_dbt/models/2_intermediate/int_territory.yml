@@ -1,0 +1,99 @@
+version: 2
+
+models:
+  - name: int_territory
+    description: "Modelo intermediário que consolida informações geográficas e de desempenho de vendas por território, estado, país e endereço associado."
+    columns:
+      - name: pk_state_province
+        data_type: int
+        description: "Chave primária que identifica o estado ou província."
+        tests:
+          - not_null
+
+      - name: state_province_code
+        data_type: string
+        description: "Código alfanumérico do estado ou província."
+
+      - name: country_region_code
+        data_type: string
+        description: "Código do país ou região ao qual o estado pertence."
+
+      - name: flag_state_or_province
+        data_type: boolean
+        description: "Indica se o registro é de um estado (true) ou província (false)."
+
+      - name: name_state_province
+        data_type: string
+        description: "Nome do estado ou província."
+
+      - name: fk_territory_sales
+        data_type: int
+        description: "Chave estrangeira que referencia o território de vendas."
+        tests:
+          - not_null
+
+      - name: pk_territory_sales
+        data_type: int
+        description: "Chave primária do território de vendas."
+        tests:
+          - not_null
+
+      - name: territory_name
+        data_type: string
+        description: "Nome do território de vendas."
+
+      - name: country_code
+        data_type: string
+        description: "Código do país associado ao território."
+
+      - name: territory_group
+        data_type: string
+        description: "Grupo ou região geográfica do território (ex: América do Norte, Europa, etc.)."
+
+      - name: sales_year_to_date
+        data_type: decimal(18,4)
+        description: "Total de vendas acumulado no território desde o início do ano."
+
+      - name: sales_last_year
+        data_type: decimal(18,4)
+        description: "Total de vendas realizadas no território durante o último ano."
+
+      - name: territory_cost_year_to_date
+        data_type: decimal(18,4)
+        description: "Custo acumulado no território desde o início do ano."
+
+      - name: territory_cost_last_year
+        data_type: decimal(18,4)
+        description: "Custo total do território no último ano."
+
+      - name: pk_address
+        data_type: int
+        description: "Chave primária do endereço associado ao território."
+        tests:
+          - not_null
+
+      - name: address_line_1
+        data_type: string
+        description: "Primeira linha do endereço (rua, número)."
+
+      - name: address_line_2
+        data_type: string
+        description: "Segunda linha do endereço, geralmente complementar (ex: bloco, sala)."
+
+      - name: city
+        data_type: string
+        description: "Cidade referente ao endereço."
+
+      - name: fk_state_province
+        data_type: int
+        description: "Chave estrangeira que referencia o estado ou província do endereço."
+        tests:
+          - not_null
+
+      - name: postal_code
+        data_type: string
+        description: "Código postal (CEP) do endereço."
+
+      - name: row_num
+        data_type: int
+        description: "Número da linha usado para ordenação ou deduplicação."

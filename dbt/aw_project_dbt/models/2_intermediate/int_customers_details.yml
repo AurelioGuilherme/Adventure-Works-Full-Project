@@ -1,0 +1,60 @@
+version: 2
+
+models:
+  - name: int_customers_details
+    description: "Modelo intermediário que consolida os dados dos clientes com detalhes pessoais e de relacionamento com a loja e território de vendas."
+    columns:
+      - name: pk_customer
+        data_type: int
+        description: "Identificador único do cliente."
+        tests:
+          - unique
+          - not_null
+
+      - name: fk_person
+        data_type: int
+        description: "Chave estrangeira que referencia os dados pessoais do cliente."
+        tests:
+          - not_null
+
+      - name: fk_store
+        data_type: int
+        description: "Chave estrangeira que identifica a loja associada ao cliente."
+
+      - name: fk_territory_sales
+        data_type: int
+        description: "Chave estrangeira que identifica o território de vendas do cliente."
+        tests:
+          - not_null
+
+      - name: person_type
+        data_type: string
+        description: "Tipo de pessoa (ex: Individual ou Store contact)."
+
+      - name: name_style
+        data_type: boolean
+        description: "Define se o nome está formatado no estilo oriental (sobrenome primeiro)."
+
+      - name: title_name
+        data_type: string
+        description: "Título do cliente, como Sr., Sra., Dr., etc."
+
+      - name: first_name
+        data_type: string
+        description: "Primeiro nome do cliente."
+
+      - name: middle_name
+        data_type: string
+        description: "Nome do meio do cliente."
+
+      - name: last_name
+        data_type: string
+        description: "Sobrenome do cliente."
+
+      - name: suffix
+        data_type: string
+        description: "Sufixo do nome do cliente, como Jr., Sr., III, etc."
+
+      - name: email_promotion
+        data_type: int
+        description: "Indica o nível de aceitação de promoções via e-mail (0 = nenhuma, 1 ou 2 = aceitação parcial ou total)."
