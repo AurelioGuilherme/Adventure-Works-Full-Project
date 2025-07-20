@@ -37,7 +37,7 @@ with
             , person.suffix
             , person.email_promotion
         from customers
-        left join person
+        inner join person
             on customers.fk_person = person.pk_person
     )
 

@@ -41,6 +41,15 @@ with
             , sp.country_region_code
             , sp.flag_state_or_province
             , sp.name_state_province
+            -- colunas novas de name_state e name_province 
+            , case 
+                when sp.flag_state_or_province = true then sp.name_state_province
+                else null
+              end as name_state
+            , case 
+                when not sp.flag_state_or_province = true then sp.name_state_province
+                else null
+              end as name_province
             , sp.fk_territory_sales
             , st.pk_territory_sales
             , st.territory_name
@@ -53,13 +62,15 @@ with
             , ad.pk_address
             , ad.address_line_1
             , ad.address_line_2
+            -- adcionando uma coluna com o endereço completo
+            , concat(ad.address_line_1, ' ', coalesce(ad.address_line_2, '')) as full_address
             , ad.city
             , ad.fk_state_province
             , ad.postal_code
         from  sales_territory as st
-        left join state_province as sp
+        inner join state_province as sp
             on st.pk_territory_sales = sp.fk_territory_sales
-        left join adress as ad
+        inner join adress as ad
             on sp.pk_state_province = ad.fk_state_province
     )
 

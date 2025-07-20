@@ -1,0 +1,149 @@
+version: 2
+
+models:
+  - name: dim_dates
+    description: "Dimensão de datas que contém informações detalhadas para análise temporal, como dias, semanas, meses, trimestres e anos. Útil para agregações, comparações sazonais e análises de período anterior (YoY, WoW, MoM)."
+    columns:
+      - name: date_day
+        data_type: date
+        description: "Data principal (chave primária da dimensão)."
+
+      - name: prior_date_day
+        data_type: date
+        description: "Dia anterior ao date_day."
+
+      - name: next_date_day
+        data_type: date
+        description: "Dia seguinte ao date_day."
+
+      - name: prior_year_date_day
+        data_type: date
+        description: "Mesma data no ano anterior."
+
+      - name: prior_year_over_year_date_day
+        data_type: date
+        description: "Data correspondente ao YoY do ano anterior ao ano anterior (t - 2 anos)."
+
+      - name: day_of_week
+        data_type: int
+        description: "Número do dia da semana (1 = Domingo, 7 = Sábado)."
+
+      - name: day_of_week_iso
+        data_type: int
+        description: "Número ISO do dia da semana (1 = Segunda, 7 = Domingo)."
+
+      - name: day_of_week_name
+        data_type: string
+        description: "Nome completo do dia da semana (ex: Segunda-feira)."
+
+      - name: day_of_week_name_short
+        data_type: string
+        description: "Abreviação do dia da semana (ex: Seg)."
+
+      - name: day_of_month
+        data_type: int
+        description: "Número do dia no mês (1 a 31)."
+
+      - name: day_of_year
+        data_type: int
+        description: "Número do dia no ano (1 a 365 ou 366)."
+
+      - name: week_start_date
+        data_type: date
+        description: "Data de início da semana (semana padrão, começando no domingo)."
+
+      - name: week_end_date
+        data_type: date
+        description: "Data de fim da semana (semana padrão, terminando no sábado)."
+
+      - name: prior_year_week_start_date
+        data_type: date
+        description: "Data de início da semana correspondente no ano anterior (baseado em week_start_date)."
+
+      - name: prior_year_week_end_date
+        data_type: date
+        description: "Data de fim da semana correspondente no ano anterior (baseado em week_end_date)."
+
+      - name: week_of_year
+        data_type: int
+        description: "Número da semana do ano (1 a 52 ou 53)."
+
+      - name: iso_week_start_date
+        data_type: date
+        description: "Data de início da semana ISO (semana começando na segunda-feira)."
+
+      - name: iso_week_end_date
+        data_type: date
+        description: "Data de fim da semana ISO (semana terminando no domingo)."
+
+      - name: prior_year_iso_week_start_date
+        data_type: date
+        description: "Início da semana ISO correspondente no ano anterior."
+
+      - name: prior_year_iso_week_end_date
+        data_type: date
+        description: "Fim da semana ISO correspondente no ano anterior."
+
+      - name: iso_week_of_year
+        data_type: int
+        description: "Número da semana ISO no ano (1 a 52 ou 53)."
+
+      - name: prior_year_week_of_year
+        data_type: int
+        description: "Número da semana do ano anterior (semana padrão)."
+
+      - name: prior_year_iso_week_of_year
+        data_type: int
+        description: "Número da semana ISO do ano anterior."
+
+      - name: month_of_year
+        data_type: int
+        description: "Número do mês no ano (1 = Janeiro, 12 = Dezembro)."
+
+      - name: month_name
+        data_type: string
+        description: "Nome completo do mês."
+
+      - name: month_name_short
+        data_type: string
+        description: "Nome abreviado do mês (ex: Jan, Fev, Mar)."
+
+      - name: month_start_date
+        data_type: date
+        description: "Primeiro dia do mês."
+
+      - name: month_end_date
+        data_type: date
+        description: "Último dia do mês."
+
+      - name: prior_year_month_start_date
+        data_type: date
+        description: "Primeiro dia do mesmo mês no ano anterior."
+
+      - name: prior_year_month_end_date
+        data_type: date
+        description: "Último dia do mesmo mês no ano anterior."
+
+      - name: quarter_of_year
+        data_type: int
+        description: "Número do trimestre (1 a 4)."
+
+      - name: quarter_start_date
+        data_type: date
+        description: "Data de início do trimestre."
+
+      - name: quarter_end_date
+        data_type: date
+        description: "Data de fim do trimestre."
+
+      - name: year_number
+        data_type: int
+        description: "Ano numérico (ex: 2024)."
+
+      - name: year_start_date
+        data_type: date
+        description: "Primeiro dia do ano."
+
+      - name: year_end_date
+        data_type: date
+        description: "Último dia do ano."

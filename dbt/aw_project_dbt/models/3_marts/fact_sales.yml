@@ -1,0 +1,220 @@
+version: 2
+
+models:
+  - name: fact_sales
+    description: ""
+    tests:
+      - due_date_after_order_date
+    columns:
+      - name: pk_sales_order_detail
+        data_type: int
+        description: "Chave prim\u00e1ria do item do pedido, identifica de forma \u00fanica cada linha de detalhe do pedido."
+
+      - name: fk_product
+        data_type: int
+        description: "Chave estrangeira que identifica o produto vendido."
+
+      - name: pk_sales_order
+        data_type: int
+        description: "Chave prim\u00e1ria do pedido de venda. Representa o pedido como um todo."
+
+      - name: pk_customer
+        data_type: int
+        description: "Identificador unico do cliente."
+
+      - name: pk_product
+        data_type: int
+        description: ""
+
+      - name: pk_vendor
+        data_type: int
+        description: ""
+
+      - name: pk_address
+        data_type: int
+        description: "Chave prim\u00e1ria do endere\u00e7o associado ao territ\u00f3rio."
+
+      - name: pk_ship_method
+        data_type: int
+        description: ""
+
+      - name: fk_sales_reason
+        data_type: int
+        description: ""
+
+      - name: fk_sales_order
+        data_type: int
+        description: "Chave estrangeira que identifica o pedido ao qual este detalhe pertence."
+
+      - name: fk_credit_card
+        data_type: int
+        description: ""
+
+      - name: order_date_dt
+        data_type: date
+        description: "Data em que o pedido foi realizado."
+
+      - name: ship_date_dt
+        data_type: date
+        description: ""
+
+      - name: due_date_dt
+        data_type: date
+        description: ""
+
+      - name: online_order_flag
+        data_type: boolean
+        description: ""
+
+      - name: sales_status
+        data_type: int
+        description: ""
+
+      - name: date_day
+        data_type: date
+        description: "Data principal (chave prim\u00e1ria da dimens\u00e3o)."
+
+      - name: quarter_of_year
+        data_type: int
+        description: "N\u00famero do trimestre (1 a 4)."
+
+      - name: year_number
+        data_type: int
+        description: "Ano num\u00e9rico (ex: 2024)."
+
+      - name: quarter_start_date
+        data_type: date
+        description: "Data de in\u00edcio do trimestre."
+
+      - name: quarter_end_date
+        data_type: date
+        description: "Data de fim do trimestre."
+
+      - name: order_qty
+        data_type: int
+        description: "Quantidade de unidades do produto vendidas neste item de pedido."
+
+      - name: unit_price
+        data_type: decimal(16,4)
+        description: "Pre\u00e7o unit\u00e1rio do produto no momento da venda."
+
+      - name: unit_price_discount
+        data_type: decimal(16,4)
+        description: "Desconto aplicado ao pre\u00e7o unit\u00e1rio do produto."
+
+      - name: sub_total_sale
+        data_type: decimal(16,4)
+        description: "Subtotal do item do pedido, calculado como (unit_price - discount) * quantity."
+
+      - name: sales_sub_total
+        data_type: decimal(18,4)
+        description: "Subtotal geral do pedido, excluindo impostos e frete."
+
+      - name: standard_cost
+        data_type: decimal(18,4)
+        description: "Custo padrao do produto."
+
+      - name: selling_price
+        data_type: decimal(18,4)
+        description: "Preco de venda padrao do produto."
+
+      - name: sales_tax_amt
+        data_type: decimal(18,4)
+        description: "Valor total de impostos aplicados ao pedido."
+
+      - name: sales_freight
+        data_type: decimal(18,4)
+        description: "Valor total do frete do pedido."
+
+      - name: total_due
+        data_type: decimal(18,4)
+        description: "Valor total a pagar pelo cliente, incluindo subtotal, impostos e frete."
+
+      - name: commission_sales_pct
+        data_type: decimal(6,4)
+        description: "Percentual de comissao sobre as vendas."
+
+      - name: customer_full_name
+        data_type: string
+        description: ""
+
+      - name: name_product
+        data_type: string
+        description: "Nome do produto."
+
+      - name: product_category_name
+        data_type: string
+        description: "Nome da categoria do produto."
+
+      - name: sub_category_name
+        data_type: string
+        description: "Nome da subcategoria do produto."
+
+      - name: product_line
+        data_type: string
+        description: "Linha de produto em qual o item pertence (ex: R, M, T, S)."
+
+      - name: product_class
+        data_type: string
+        description: "Classe do produto (ex: High, Medium, Low)."
+
+      - name: gender_category_product
+        data_type: string
+        description: "Categoria de genero associada ao produto (ex: Masculino, Feminino, Unissex)."
+
+      - name: is_manufactured
+        data_type: boolean
+        description: "Indica se o produto \u00e9 fabricado internamente (true) ou adquirido externamente (false)."
+
+      - name: vendor_full_name
+        data_type: string
+        description: ""
+
+      - name: shipping_name
+        data_type: string
+        description: ""
+
+      - name: full_address
+        data_type: string
+        description: "Endereco completo com as duas linhas concatenadas"
+
+      - name: city
+        data_type: string
+        description: "Cidade referente ao endere\u00e7o."
+
+      - name: territory_name
+        data_type: string
+        description: "Nome do territ\u00f3rio de vendas."
+
+      - name: name_province
+        data_type: string
+        description: "Nome da provincia."
+
+      - name: name_state
+        data_type: string
+        description: "Nome do estado."
+
+      - name: country_region_code
+        data_type: string
+        description: "C\u00f3digo do pa\u00eds ou regi\u00e3o ao qual o estado pertence."
+
+      - name: country_code
+        data_type: string
+        description: "C\u00f3digo do pa\u00eds associado ao territ\u00f3rio."
+
+      - name: territory_group
+        data_type: string
+        description: "Grupo ou regi\u00e3o geogr\u00e1fica do territ\u00f3rio (ex: Am\u00e9rica do Norte, Europa, etc.)."
+
+      - name: card_type
+        data_type: string
+        description: ""
+
+      - name: reason_name
+        data_type: string
+        description: "Nome da razao"
+
+      - name: reason_type
+        data_type: string
+        description: "Tipo da razao da venda"
+

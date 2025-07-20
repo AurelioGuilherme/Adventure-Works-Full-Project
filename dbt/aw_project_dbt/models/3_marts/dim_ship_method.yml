@@ -1,0 +1,22 @@
+version: 2
+
+models:
+  - name: dim_ship_method
+    description: ""
+    columns:
+      - name: sk_reason
+        data_type: string
+        description: ""
+
+      - name: shipping_name
+        data_type: string
+        description: ""
+
+      - name: minimum_shipping_charge
+        data_type: decimal(16,4)
+        description: ""
+
+      - name: shipping_cost_rate
+        data_type: decimal(16,4)
+        description: ""
+

@@ -1,0 +1,20 @@
+version: 2
+
+models:
+  - name: dim_reason
+    description: "Dimensao contendo as razoes das vendas"
+    columns:
+      - name: sk_reason
+        data_type: string
+        description: "Chave surrogada de razoes da venda"
+        tests:
+          - not_null
+          - unique
+
+      - name: reason_name
+        data_type: string
+        description: "Nome da razao"
+
+      - name: reason_type
+        data_type: string
+        description: "Tipo da razao da venda"
