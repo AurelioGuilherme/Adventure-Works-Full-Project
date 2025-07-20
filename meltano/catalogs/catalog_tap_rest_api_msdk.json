@@ -1,0 +1,1092 @@
+{
+    "streams": [
+        {
+            "tap_stream_id": "purchaseorderdetail",
+            "replication_method": "FULL_TABLE",
+            "key_properties": [
+                "PurchaseOrderDetailID"
+            ],
+            "schema": {
+                "properties": {
+                    "PurchaseOrderID": {
+                        "type": [
+                            "number",
+                            "null"
+                        ]
+                    },
+                    "PurchaseOrderDetailID": {
+                        "type": [
+                            "number",
+                            "null"
+                        ]
+                    },
+                    "DueDate": {
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    },
+                    "OrderQty": {
+                        "type": [
+                            "number",
+                            "null"
+                        ]
+                    },
+                    "ProductID": {
+                        "type": [
+                            "number",
+                            "null"
+                        ]
+                    },
+                    "UnitPrice": {
+                        "type": [
+                            "number",
+                            "null"
+                        ]
+                    },
+                    "LineTotal": {
+                        "type": [
+                            "number",
+                            "null"
+                        ]
+                    },
+                    "ReceivedQty": {
+                        "type": [
+                            "number",
+                            "null"
+                        ]
+                    },
+                    "RejectedQty": {
+                        "type": [
+                            "number",
+                            "null"
+                        ]
+                    },
+                    "StockedQty": {
+                        "type": [
+                            "number",
+                            "null"
+                        ]
+                    },
+                    "ModifiedDate": {
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    }
+                },
+                "type": "object",
+                "required": []
+            },
+            "stream": "purchaseorderdetail",
+            "metadata": [
+                {
+                    "breadcrumb": [
+                        "properties",
+                        "PurchaseOrderID"
+                    ],
+                    "metadata": {
+                        "inclusion": "available",
+                        "selected": true
+                    }
+                },
+                {
+                    "breadcrumb": [
+                        "properties",
+                        "PurchaseOrderDetailID"
+                    ],
+                    "metadata": {
+                        "inclusion": "automatic",
+                        "selected": true
+                    }
+                },
+                {
+                    "breadcrumb": [
+                        "properties",
+                        "DueDate"
+                    ],
+                    "metadata": {
+                        "inclusion": "available",
+                        "selected": true
+                    }
+                },
+                {
+                    "breadcrumb": [
+                        "properties",
+                        "OrderQty"
+                    ],
+                    "metadata": {
+                        "inclusion": "available",
+                        "selected": true
+                    }
+                },
+                {
+                    "breadcrumb": [
+                        "properties",
+                        "ProductID"
+                    ],
+                    "metadata": {
+                        "inclusion": "available",
+                        "selected": true
+                    }
+                },
+                {
+                    "breadcrumb": [
+                        "properties",
+                        "UnitPrice"
+                    ],
+                    "metadata": {
+                        "inclusion": "available",
+                        "selected": true
+                    }
+                },
+                {
+                    "breadcrumb": [
+                        "properties",
+                        "LineTotal"
+                    ],
+                    "metadata": {
+                        "inclusion": "available",
+                        "selected": true
+                    }
+                },
+                {
+                    "breadcrumb": [
+                        "properties",
+                        "ReceivedQty"
+                    ],
+                    "metadata": {
+                        "inclusion": "available",
+                        "selected": true
+                    }
+                },
+                {
+                    "breadcrumb": [
+                        "properties",
+                        "RejectedQty"
+                    ],
+                    "metadata": {
+                        "inclusion": "available",
+                        "selected": true
+                    }
+                },
+                {
+                    "breadcrumb": [
+                        "properties",
+                        "StockedQty"
+                    ],
+                    "metadata": {
+                        "inclusion": "available",
+                        "selected": true
+                    }
+                },
+                {
+                    "breadcrumb": [
+                        "properties",
+                        "ModifiedDate"
+                    ],
+                    "metadata": {
+                        "inclusion": "available",
+                        "selected": true
+                    }
+                },
+                {
+                    "breadcrumb": [],
+                    "metadata": {
+                        "inclusion": "available",
+                        "selected": true,
+                        "selected-by-default": true,
+                        "table-key-properties": [
+                            "PurchaseOrderDetailID"
+                        ]
+                    }
+                }
+            ],
+            "selected": true
+        },
+        {
+            "tap_stream_id": "purchaseorderheader",
+            "replication_method": "FULL_TABLE",
+            "key_properties": [
+                "PurchaseOrderID"
+            ],
+            "schema": {
+                "properties": {
+                    "PurchaseOrderID": {
+                        "type": [
+                            "number",
+                            "null"
+                        ]
+                    },
+                    "RevisionNumber": {
+                        "type": [
+                            "number",
+                            "null"
+                        ]
+                    },
+                    "Status": {
+                        "type": [
+                            "number",
+                            "null"
+                        ]
+                    },
+                    "EmployeeID": {
+                        "type": [
+                            "number",
+                            "null"
+                        ]
+                    },
+                    "VendorID": {
+                        "type": [
+                            "number",
+                            "null"
+                        ]
+                    },
+                    "ShipMethodID": {
+                        "type": [
+                            "number",
+                            "null"
+                        ]
+                    },
+                    "OrderDate": {
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    },
+                    "SubTotal": {
+                        "type": [
+                            "number",
+                            "null"
+                        ]
+                    },
+                    "TaxAmt": {
+                        "type": [
+                            "number",
+                            "null"
+                        ]
+                    },
+                    "Freight": {
+                        "type": [
+                            "number",
+                            "null"
+                        ]
+                    },
+                    "TotalDue": {
+                        "type": [
+                            "number",
+                            "null"
+                        ]
+                    },
+                    "ModifiedDate": {
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    },
+                    "ShipDate": {
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    }
+                },
+                "type": "object",
+                "required": []
+            },
+            "stream": "purchaseorderheader",
+            "metadata": [
+                {
+                    "breadcrumb": [
+                        "properties",
+                        "PurchaseOrderID"
+                    ],
+                    "metadata": {
+                        "inclusion": "automatic",
+                        "selected": true
+                    }
+                },
+                {
+                    "breadcrumb": [
+                        "properties",
+                        "RevisionNumber"
+                    ],
+                    "metadata": {
+                        "inclusion": "available",
+                        "selected": true
+                    }
+                },
+                {
+                    "breadcrumb": [
+                        "properties",
+                        "Status"
+                    ],
+                    "metadata": {
+                        "inclusion": "available",
+                        "selected": true
+                    }
+                },
+                {
+                    "breadcrumb": [
+                        "properties",
+                        "EmployeeID"
+                    ],
+                    "metadata": {
+                        "inclusion": "available",
+                        "selected": true
+                    }
+                },
+                {
+                    "breadcrumb": [
+                        "properties",
+                        "VendorID"
+                    ],
+                    "metadata": {
+                        "inclusion": "available",
+                        "selected": true
+                    }
+                },
+                {
+                    "breadcrumb": [
+                        "properties",
+                        "ShipMethodID"
+                    ],
+                    "metadata": {
+                        "inclusion": "available",
+                        "selected": true
+                    }
+                },
+                {
+                    "breadcrumb": [
+                        "properties",
+                        "OrderDate"
+                    ],
+                    "metadata": {
+                        "inclusion": "available",
+                        "selected": true
+                    }
+                },
+                {
+                    "breadcrumb": [
+                        "properties",
+                        "SubTotal"
+                    ],
+                    "metadata": {
+                        "inclusion": "available",
+                        "selected": true
+                    }
+                },
+                {
+                    "breadcrumb": [
+                        "properties",
+                        "TaxAmt"
+                    ],
+                    "metadata": {
+                        "inclusion": "available",
+                        "selected": true
+                    }
+                },
+                {
+                    "breadcrumb": [
+                        "properties",
+                        "Freight"
+                    ],
+                    "metadata": {
+                        "inclusion": "available",
+                        "selected": true
+                    }
+                },
+                {
+                    "breadcrumb": [
+                        "properties",
+                        "TotalDue"
+                    ],
+                    "metadata": {
+                        "inclusion": "available",
+                        "selected": true
+                    }
+                },
+                {
+                    "breadcrumb": [
+                        "properties",
+                        "ModifiedDate"
+                    ],
+                    "metadata": {
+                        "inclusion": "available",
+                        "selected": true
+                    }
+                },
+                {
+                    "breadcrumb": [
+                        "properties",
+                        "ShipDate"
+                    ],
+                    "metadata": {
+                        "inclusion": "available",
+                        "selected": true
+                    }
+                },
+                {
+                    "breadcrumb": [],
+                    "metadata": {
+                        "inclusion": "available",
+                        "selected": true,
+                        "selected-by-default": true,
+                        "table-key-properties": [
+                            "PurchaseOrderID"
+                        ]
+                    }
+                }
+            ],
+            "selected": true
+        },
+        {
+            "tap_stream_id": "salesorderdetail",
+            "replication_method": "FULL_TABLE",
+            "key_properties": [
+                "SalesOrderDetailID"
+            ],
+            "schema": {
+                "properties": {
+                    "SalesOrderID": {
+                        "type": [
+                            "number",
+                            "null"
+                        ]
+                    },
+                    "SalesOrderDetailID": {
+                        "type": [
+                            "number",
+                            "null"
+                        ]
+                    },
+                    "OrderQty": {
+                        "type": [
+                            "number",
+                            "null"
+                        ]
+                    },
+                    "ProductID": {
+                        "type": [
+                            "number",
+                            "null"
+                        ]
+                    },
+                    "SpecialOfferID": {
+                        "type": [
+                            "number",
+                            "null"
+                        ]
+                    },
+                    "UnitPrice": {
+                        "type": [
+                            "number",
+                            "null"
+                        ]
+                    },
+                    "UnitPriceDiscount": {
+                        "type": [
+                            "number",
+                            "null"
+                        ]
+                    },
+                    "LineTotal": {
+                        "type": [
+                            "number",
+                            "null"
+                        ]
+                    },
+                    "rowguid": {
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    },
+                    "ModifiedDate": {
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    },
+                    "CarrierTrackingNumber": {
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    }
+                },
+                "type": "object",
+                "required": []
+            },
+            "stream": "salesorderdetail",
+            "metadata": [
+                {
+                    "breadcrumb": [
+                        "properties",
+                        "SalesOrderID"
+                    ],
+                    "metadata": {
+                        "inclusion": "available",
+                        "selected": true
+                    }
+                },
+                {
+                    "breadcrumb": [
+                        "properties",
+                        "SalesOrderDetailID"
+                    ],
+                    "metadata": {
+                        "inclusion": "automatic",
+                        "selected": true
+                    }
+                },
+                {
+                    "breadcrumb": [
+                        "properties",
+                        "OrderQty"
+                    ],
+                    "metadata": {
+                        "inclusion": "available",
+                        "selected": true
+                    }
+                },
+                {
+                    "breadcrumb": [
+                        "properties",
+                        "ProductID"
+                    ],
+                    "metadata": {
+                        "inclusion": "available",
+                        "selected": true
+                    }
+                },
+                {
+                    "breadcrumb": [
+                        "properties",
+                        "SpecialOfferID"
+                    ],
+                    "metadata": {
+                        "inclusion": "available",
+                        "selected": true
+                    }
+                },
+                {
+                    "breadcrumb": [
+                        "properties",
+                        "UnitPrice"
+                    ],
+                    "metadata": {
+                        "inclusion": "available",
+                        "selected": true
+                    }
+                },
+                {
+                    "breadcrumb": [
+                        "properties",
+                        "UnitPriceDiscount"
+                    ],
+                    "metadata": {
+                        "inclusion": "available",
+                        "selected": true
+                    }
+                },
+                {
+                    "breadcrumb": [
+                        "properties",
+                        "LineTotal"
+                    ],
+                    "metadata": {
+                        "inclusion": "available",
+                        "selected": true
+                    }
+                },
+                {
+                    "breadcrumb": [
+                        "properties",
+                        "rowguid"
+                    ],
+                    "metadata": {
+                        "inclusion": "available",
+                        "selected": true
+                    }
+                },
+                {
+                    "breadcrumb": [
+                        "properties",
+                        "ModifiedDate"
+                    ],
+                    "metadata": {
+                        "inclusion": "available",
+                        "selected": true
+                    }
+                },
+                {
+                    "breadcrumb": [
+                        "properties",
+                        "CarrierTrackingNumber"
+                    ],
+                    "metadata": {
+                        "inclusion": "available",
+                        "selected": true
+                    }
+                },
+                {
+                    "breadcrumb": [],
+                    "metadata": {
+                        "inclusion": "available",
+                        "selected": true,
+                        "selected-by-default": true,
+                        "table-key-properties": [
+                            "SalesOrderDetailID"
+                        ]
+                    }
+                }
+            ],
+            "selected": true
+        },
+        {
+            "tap_stream_id": "salesorderheader",
+            "replication_method": "FULL_TABLE",
+            "key_properties": [
+                "SalesOrderID"
+            ],
+            "schema": {
+                "properties": {
+                    "SalesOrderID": {
+                        "type": [
+                            "number",
+                            "null"
+                        ]
+                    },
+                    "RevisionNumber": {
+                        "type": [
+                            "number",
+                            "null"
+                        ]
+                    },
+                    "OrderDate": {
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    },
+                    "DueDate": {
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    },
+                    "Status": {
+                        "type": [
+                            "number",
+                            "null"
+                        ]
+                    },
+                    "OnlineOrderFlag": {
+                        "type": [
+                            "boolean",
+                            "null"
+                        ]
+                    },
+                    "SalesOrderNumber": {
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    },
+                    "CustomerID": {
+                        "type": [
+                            "number",
+                            "null"
+                        ]
+                    },
+                    "BillToAddressID": {
+                        "type": [
+                            "number",
+                            "null"
+                        ]
+                    },
+                    "ShipToAddressID": {
+                        "type": [
+                            "number",
+                            "null"
+                        ]
+                    },
+                    "ShipMethodID": {
+                        "type": [
+                            "number",
+                            "null"
+                        ]
+                    },
+                    "SubTotal": {
+                        "type": [
+                            "number",
+                            "null"
+                        ]
+                    },
+                    "TaxAmt": {
+                        "type": [
+                            "number",
+                            "null"
+                        ]
+                    },
+                    "Freight": {
+                        "type": [
+                            "number",
+                            "null"
+                        ]
+                    },
+                    "TotalDue": {
+                        "type": [
+                            "number",
+                            "null"
+                        ]
+                    },
+                    "rowguid": {
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    },
+                    "ModifiedDate": {
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    },
+                    "ShipDate": {
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    },
+                    "PurchaseOrderNumber": {
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    },
+                    "AccountNumber": {
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    },
+                    "SalesPersonID": {
+                        "type": [
+                            "number",
+                            "null"
+                        ]
+                    },
+                    "TerritoryID": {
+                        "type": [
+                            "number",
+                            "null"
+                        ]
+                    },
+                    "CreditCardID": {
+                        "type": [
+                            "number",
+                            "null"
+                        ]
+                    },
+                    "CreditCardApprovalCode": {
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    },
+                    "CurrencyRateID": {
+                        "type": [
+                            "number",
+                            "null"
+                        ]
+                    },
+                    "Comment": {
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    }
+                },
+                "type": "object",
+                "required": []
+            },
+            "stream": "salesorderheader",
+            "metadata": [
+                {
+                    "breadcrumb": [
+                        "properties",
+                        "SalesOrderID"
+                    ],
+                    "metadata": {
+                        "inclusion": "automatic",
+                        "selected": true
+                    }
+                },
+                {
+                    "breadcrumb": [
+                        "properties",
+                        "RevisionNumber"
+                    ],
+                    "metadata": {
+                        "inclusion": "available",
+                        "selected": true
+                    }
+                },
+                {
+                    "breadcrumb": [
+                        "properties",
+                        "OrderDate"
+                    ],
+                    "metadata": {
+                        "inclusion": "available",
+                        "selected": true
+                    }
+                },
+                {
+                    "breadcrumb": [
+                        "properties",
+                        "DueDate"
+                    ],
+                    "metadata": {
+                        "inclusion": "available",
+                        "selected": true
+                    }
+                },
+                {
+                    "breadcrumb": [
+                        "properties",
+                        "Status"
+                    ],
+                    "metadata": {
+                        "inclusion": "available",
+                        "selected": true
+                    }
+                },
+                {
+                    "breadcrumb": [
+                        "properties",
+                        "OnlineOrderFlag"
+                    ],
+                    "metadata": {
+                        "inclusion": "available",
+                        "selected": true
+                    }
+                },
+                {
+                    "breadcrumb": [
+                        "properties",
+                        "SalesOrderNumber"
+                    ],
+                    "metadata": {
+                        "inclusion": "available",
+                        "selected": true
+                    }
+                },
+                {
+                    "breadcrumb": [
+                        "properties",
+                        "CustomerID"
+                    ],
+                    "metadata": {
+                        "inclusion": "available",
+                        "selected": true
+                    }
+                },
+                {
+                    "breadcrumb": [
+                        "properties",
+                        "BillToAddressID"
+                    ],
+                    "metadata": {
+                        "inclusion": "available",
+                        "selected": true
+                    }
+                },
+                {
+                    "breadcrumb": [
+                        "properties",
+                        "ShipToAddressID"
+                    ],
+                    "metadata": {
+                        "inclusion": "available",
+                        "selected": true
+                    }
+                },
+                {
+                    "breadcrumb": [
+                        "properties",
+                        "ShipMethodID"
+                    ],
+                    "metadata": {
+                        "inclusion": "available",
+                        "selected": true
+                    }
+                },
+                {
+                    "breadcrumb": [
+                        "properties",
+                        "SubTotal"
+                    ],
+                    "metadata": {
+                        "inclusion": "available",
+                        "selected": true
+                    }
+                },
+                {
+                    "breadcrumb": [
+                        "properties",
+                        "TaxAmt"
+                    ],
+                    "metadata": {
+                        "inclusion": "available",
+                        "selected": true
+                    }
+                },
+                {
+                    "breadcrumb": [
+                        "properties",
+                        "Freight"
+                    ],
+                    "metadata": {
+                        "inclusion": "available",
+                        "selected": true
+                    }
+                },
+                {
+                    "breadcrumb": [
+                        "properties",
+                        "TotalDue"
+                    ],
+                    "metadata": {
+                        "inclusion": "available",
+                        "selected": true
+                    }
+                },
+                {
+                    "breadcrumb": [
+                        "properties",
+                        "rowguid"
+                    ],
+                    "metadata": {
+                        "inclusion": "available",
+                        "selected": true
+                    }
+                },
+                {
+                    "breadcrumb": [
+                        "properties",
+                        "ModifiedDate"
+                    ],
+                    "metadata": {
+                        "inclusion": "available",
+                        "selected": true
+                    }
+                },
+                {
+                    "breadcrumb": [
+                        "properties",
+                        "ShipDate"
+                    ],
+                    "metadata": {
+                        "inclusion": "available",
+                        "selected": true
+                    }
+                },
+                {
+                    "breadcrumb": [
+                        "properties",
+                        "PurchaseOrderNumber"
+                    ],
+                    "metadata": {
+                        "inclusion": "available",
+                        "selected": true
+                    }
+                },
+                {
+                    "breadcrumb": [
+                        "properties",
+                        "AccountNumber"
+                    ],
+                    "metadata": {
+                        "inclusion": "available",
+                        "selected": true
+                    }
+                },
+                {
+                    "breadcrumb": [
+                        "properties",
+                        "SalesPersonID"
+                    ],
+                    "metadata": {
+                        "inclusion": "available",
+                        "selected": true
+                    }
+                },
+                {
+                    "breadcrumb": [
+                        "properties",
+                        "TerritoryID"
+                    ],
+                    "metadata": {
+                        "inclusion": "available",
+                        "selected": true
+                    }
+                },
+                {
+                    "breadcrumb": [
+                        "properties",
+                        "CreditCardID"
+                    ],
+                    "metadata": {
+                        "inclusion": "available",
+                        "selected": true
+                    }
+                },
+                {
+                    "breadcrumb": [
+                        "properties",
+                        "CreditCardApprovalCode"
+                    ],
+                    "metadata": {
+                        "inclusion": "available",
+                        "selected": true
+                    }
+                },
+                {
+                    "breadcrumb": [
+                        "properties",
+                        "CurrencyRateID"
+                    ],
+                    "metadata": {
+                        "inclusion": "available",
+                        "selected": true
+                    }
+                },
+                {
+                    "breadcrumb": [
+                        "properties",
+                        "Comment"
+                    ],
+                    "metadata": {
+                        "inclusion": "available",
+                        "selected": true
+                    }
+                },
+                {
+                    "breadcrumb": [],
+                    "metadata": {
+                        "inclusion": "available",
+                        "selected": true,
+                        "selected-by-default": true,
+                        "table-key-properties": [
+                            "SalesOrderID"
+                        ]
+                    }
+                }
+            ],
+            "selected": true
+        }
+    ]
+}

@@ -1,0 +1,51 @@
+version: 2
+
+models:
+  - name: int_inventory_details
+    description: "Modelo intermediário que consolida os dados de inventário de produtos com detalhes da localização de estoque e quantidade disponível."
+    columns:
+      - name: fk_product
+        data_type: int
+        description: "Chave estrangeira que referencia o produto em estoque."
+        tests:
+          - not_null
+
+      - name: fk_stock_location
+        data_type: int
+        description: "Chave estrangeira que referencia a localização física do estoque."
+        tests:
+          - not_null
+
+      - name: compartment
+        data_type: string
+        description: "Compartimento específico onde o produto está armazenado dentro da localização de estoque."
+
+      - name: container_in_inventory
+        data_type: int
+        description: "Identificador do recipiente ou unidade de armazenamento usada no inventário."
+
+      - name: quantity
+        data_type: int
+        description: "Quantidade de unidades do produto disponíveis na localização de estoque."
+
+      - name: pk_stock_location
+        data_type: int
+        description: "Chave primária da tabela de localizações de estoque."
+        tests:
+          - not_null
+
+      - name: name_stock_location
+        data_type: string
+        description: "Nome ou descrição da localização de estoque."
+
+      - name: cost_rate_stock
+        data_type: decimal(18,4)
+        description: "Custo médio por unidade para armazenar produtos nesta localização."
+
+      - name: total_capacity_stock
+        data_type: int
+        description: "Capacidade total de armazenamento da localização de estoque."
+
+      - name: row_num
+        data_type: int
+        description: "Número da linha usado para ordenação ou identificação sequencial em operações analíticas."

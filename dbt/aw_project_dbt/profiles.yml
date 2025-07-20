@@ -1,0 +1,11 @@
+aw_project_dbt:
+  outputs:
+    dev:
+      catalog: ted_dev
+      host: "{{ env_var('DBT_HOST') }}" 
+      http_path: "{{ env_var('DBT_HTTP_PATH') }}" 
+      schema: dev_aurelio_silva  
+      threads: 2
+      token: "{{ env_var('DBT_TOKEN') }}"
+      type: databricks
+  target: dev

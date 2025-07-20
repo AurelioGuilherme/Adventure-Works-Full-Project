@@ -1,0 +1,88 @@
+version: 2
+
+models:
+  - name: int_orders
+    description: "Modelo intermediário que consolida os dados de pedidos de venda, incluindo informações do cliente, produto, envio e totais financeiros."
+    columns:
+      - name: pk_sales_order_detail
+        data_type: int
+        description: "Chave primária do item do pedido, identifica de forma única cada linha de detalhe do pedido."
+        tests:
+          - unique
+          - not_null
+
+      - name: fk_sales_order
+        data_type: int
+        description: "Chave estrangeira que identifica o pedido ao qual este detalhe pertence."
+        tests:
+          - not_null
+
+      - name: fk_product
+        data_type: int
+        description: "Chave estrangeira que identifica o produto vendido."
+        tests:
+          - not_null
+
+      - name: fk_customer
+        data_type: int
+        description: "Chave estrangeira que identifica o cliente que fez o pedido."
+        tests:
+          - not_null
+
+      - name: fk_ship_to_address
+        data_type: int
+        description: "Chave estrangeira que identifica o endereço de entrega do pedido."
+        tests:
+          - not_null
+
+      - name: fk_ship_method
+        data_type: int
+        description: "Chave estrangeira que identifica o método de envio utilizado."
+        tests:
+          - not_null
+
+      - name: pk_sales_order
+        data_type: int
+        description: "Chave primária do pedido de venda. Representa o pedido como um todo."
+        tests:
+          - not_null
+
+      - name: order_date_dt
+        data_type: date
+        description: "Data em que o pedido foi realizado."
+
+      - name: unit_price
+        data_type: decimal(16,4)
+        description: "Preço unitário do produto no momento da venda."
+
+      - name: unit_price_discount
+        data_type: decimal(16,4)
+        description: "Desconto aplicado ao preço unitário do produto."
+
+      - name: order_qty
+        data_type: int
+        description: "Quantidade de unidades do produto vendidas neste item de pedido."
+
+      - name: sub_total_sale
+        data_type: decimal(16,4)
+        description: "Subtotal do item do pedido, calculado como (unit_price - discount) * quantity."
+
+      - name: sales_sub_total
+        data_type: decimal(18,4)
+        description: "Subtotal geral do pedido, excluindo impostos e frete."
+
+      - name: sales_tax_amt
+        data_type: decimal(18,4)
+        description: "Valor total de impostos aplicados ao pedido."
+
+      - name: sales_freight
+        data_type: decimal(18,4)
+        description: "Valor total do frete do pedido."
+
+      - name: total_due
+        data_type: decimal(18,4)
+        description: "Valor total a pagar pelo cliente, incluindo subtotal, impostos e frete."
+
+      - name: row_num
+        data_type: int
+        description: "Número da linha usado para ordenação ou identificação sequencial do pedido."

@@ -1,0 +1,38 @@
+version: 2
+
+models:
+  - name: dim_vendor
+    description: ""
+    columns:
+      - name: sk_vendor
+        data_type: string
+        description: "Chave surrogada de vendedor"
+
+      - name: full_name
+        data_type: string
+        description: "Nome completo"
+
+      - name: fk_territory_sales
+        data_type: int
+        description: "Chave estrangeira que identifica o territorio de vendas."
+
+      - name: sales_yearly_quota
+        data_type: decimal(16,4)
+        description: "Meta anual de vendas atribuida ao vendedor."
+
+      - name: bonus_due
+        data_type: decimal(16,4)
+        description: "Valor de bonus a receber com base no desempenho."
+
+      - name: commission_sales_pct
+        data_type: decimal(6,4)
+        description: "Percentual de comissao sobre as vendas."
+
+      - name: sales_year_to_date
+        data_type: decimal(16,4)
+        description: "Valor total de vendas realizadas no ano corrente ate a data atual."
+
+      - name: sales_last_year
+        data_type: decimal(16,4)
+        description: "Total de vendas realizadas pelo vendedor no ano anterior."
+
