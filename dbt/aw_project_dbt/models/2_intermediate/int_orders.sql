@@ -49,6 +49,15 @@ with
             , oh.ship_date_dt
             , oh.due_date_dt
             , oh.sales_status
+            , case oh.sales_status
+                when 1 then 'in process'
+                when 2 then 'approved'
+                when 3 then 'backordered'
+                when 4 then 'rejected'
+                when 5 then 'shipped'
+                when 6 then 'cancelled'
+                else 'unknown'
+              end as status_name
             , od.unit_price
             , od.unit_price_discount
             , od.order_qty
