@@ -17,6 +17,7 @@ with
             , ship_date_dt
             , due_date_dt
             , sales_status
+            , status_name
             , unit_price
             , unit_price_discount
             , order_qty
@@ -137,6 +138,7 @@ with
             , orders.due_date_dt
             , orders.online_order_flag
             , orders.sales_status
+            , orders.status_name
             , dt.date_day
             , dt.quarter_of_year
             , dt.year_number
