@@ -26,6 +26,14 @@ models:
         data_type: string
         description: "Nome do estado ou província."
 
+      - name: name_state
+        data_type: string
+        description: "Nome do estado."
+
+      - name: name_province
+        data_type: string
+        description: "Nome da provincia."
+
       - name: fk_territory_sales
         data_type: int
         description: "Chave estrangeira que referencia o território de vendas."
@@ -71,15 +79,20 @@ models:
         description: "Chave primária do endereço associado ao território."
         tests:
           - not_null
+          - unique
 
       - name: address_line_1
         data_type: string
-        description: "Primeira linha do endereço (rua, número)."
+        description: "Primeira linha do endereço (rua)."
 
       - name: address_line_2
         data_type: string
-        description: "Segunda linha do endereço, geralmente complementar (ex: bloco, sala)."
+        description: "Segunda linha do endereco complementar (numero/bloco)."
 
+      - name: full_address
+        data_type: string
+        description: "Endereco completo com as duas linhas concatenadas"
+        
       - name: city
         data_type: string
         description: "Cidade referente ao endereço."

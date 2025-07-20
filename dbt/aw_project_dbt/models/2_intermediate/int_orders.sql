@@ -7,7 +7,12 @@ with
             , fk_ship_method
             , fk_territory_sales
             , fk_credit_card
+            , fk_vendor
+            , online_order_flag
+            , sales_status
             , order_date_dt
+            , due_date_dt
+            , ship_date_dt
             , sales_sub_total
             , sales_tax_amt
             , sales_freight
@@ -33,12 +38,17 @@ with
             , od.fk_sales_order
             , od.fk_product
             , oh.fk_customer
+            , oh.fk_vendor
             , oh.fk_ship_to_address
             , oh.fk_ship_method
             , oh.pk_sales_order
             , oh.fk_territory_sales
             , oh.fk_credit_card
+            , oh.online_order_flag
             , oh.order_date_dt
+            , oh.ship_date_dt
+            , oh.due_date_dt
+            , oh.sales_status
             , od.unit_price
             , od.unit_price_discount
             , od.order_qty
@@ -52,16 +62,5 @@ with
             on oh.pk_sales_order = od.fk_sales_order
     )
 
-    , deduplication as (
-        select
-            *
-            , row_number() over (
-                partition by pk_sales_order_detail, pk_sales_order
-                order by pk_sales_order
-            ) as row_num
-        from orders
-        qualify row_num = 1
-    )
-
 select *
-from deduplication
+from orders

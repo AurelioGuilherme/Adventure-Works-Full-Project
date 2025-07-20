@@ -1,0 +1,73 @@
+version: 2
+
+models:
+  - name: dim_customers
+    description: ""
+    columns:
+      - name: sk_customer
+        data_type: string
+        description: ""
+        tests:
+          - not_null
+          - unique
+
+      - name: pk_customer
+        data_type: int
+        description: "Identificador unico do cliente."
+
+      - name: fk_person
+        data_type: int
+        description: "Chave estrangeira que referencia os dados pessoais do cliente."
+
+      - name: fk_territory_sales
+        data_type: int
+        description: "Chave estrangeira que referencia o territorio de vendas."
+
+      - name: person_type
+        data_type: string
+        description: "Tipo de pessoa (ex: Individual ou Store contact)."
+
+      - name: first_name
+        data_type: string
+        description: "Primeiro nome do cliente."
+
+      - name: middle_name
+        data_type: string
+        description: "Nome do meio do cliente."
+
+      - name: last_name
+        data_type: string
+        description: "Sobrenome do cliente."
+
+      - name: name_style
+        data_type: boolean
+        description: "Define se o nome esta formatado no estilo oriental (sobrenome primeiro)."
+
+      - name: email_promotion
+        data_type: int
+        description: "Indica o nivel de aceitacao de promocoes via e-mail (0 = nenhuma, 1 ou 2 = aceitacao parcial ou total)."
+
+      - name: full_name
+        data_type: string
+        description: "Nome completo do cliente"
+
+      - name: territory_name
+        data_type: string
+        description: "Nome do territorio de vendas."
+
+      - name: country_code
+        data_type: string
+        description: "Codigo do pais associado ao territorio."
+
+      - name: territory_group
+        data_type: string
+        description: "Grupo ou regiao geografica do territorio."
+
+      - name: name_state_province
+        data_type: string
+        description: "Nome do estado ou provincia."
+
+      - name: city
+        data_type: string
+        description: "Cidade referente ao endereco."
+

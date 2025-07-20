@@ -14,13 +14,23 @@ with
         where person_type in ('IN', 'SC')
     )
 
+    -- removendo os dados duplicados
+    , person_address_ranked as (
+        select
+            fk_person
+            , fk_address
+            , row_number() over (partition by fk_person order by fk_address) as rn
+        from {{ ref('stg_mssql__person_address') }}
+    )
+
     , person_address as (
         select
             fk_person
             , fk_address
-        from {{ ref('stg_mssql__person_address') }}
+        from person_address_ranked
+        where rn = 1
     )
-
+    
     , territory as (
         select
             *
@@ -67,7 +77,21 @@ with
                 'pk_customer'
                 ])  
             }} as sk_customer
-            , fact_customers.*
+                  , pk_customer 
+                  , fk_person 
+                  , fk_territory_sales
+                  , person_type
+                  , first_name
+                  , middle_name
+                  , last_name
+                  , name_style
+                  , email_promotion
+                  , full_name
+                  , territory_name
+                  , country_code
+                  , territory_group
+                  , name_state_province
+                  , city
         from fact_customers
     )
 

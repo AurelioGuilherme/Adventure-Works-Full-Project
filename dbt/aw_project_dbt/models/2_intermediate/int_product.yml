@@ -69,7 +69,11 @@ models:
 
       - name: discontinued_date_dt
         data_type: date
-        description: "Data de descontinuação do produto (pode ser nula)."
+        description: "Data de descontinuação do produto."
+
+      - name: is_discontinued
+        data_type: boolean
+        description: "Tag booleana se o produto foi descontinuado"
 
       - name: pk_product_sub_category
         data_type: int
@@ -93,7 +97,7 @@ models:
         tests:
           - not_null
 
-      - name: name_product_category
+      - name: product_category_name
         data_type: string
         description: "Nome da categoria do produto."
 

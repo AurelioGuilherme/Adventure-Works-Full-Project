@@ -75,7 +75,7 @@ with
             , coalesce(psc.sub_category_name, 'Not Classified') as sub_category_name
             , coalesce(psc.fk_product_category, max_ids.not_classified_category_id) as fk_product_category
             , coalesce(pc.pk_product_category, max_ids.not_classified_category_id) as pk_product_category
-            , coalesce(pc.name_product_category, 'Not Classified') as name_product_category
+            , coalesce(pc.name_product_category, 'Not Classified') as product_category_name
         from product_details
         cross join max_ids
         left join product_sub_category as psc            
@@ -84,36 +84,5 @@ with
             on coalesce(psc.fk_product_category, max_ids.not_classified_category_id) = pc.pk_product_category
     )
 
-    , deduplication as (
-        select
-            pk_product
-            , name_product
-            , is_manufactured
-            , is_final_product
-            , product_color
-            , safety_stock_level
-            , minimal_stock_level
-            , standard_cost
-            , selling_price
-            , days_to_manufacture
-            , product_line
-            , product_class
-            , gender_category_product
-            , sell_start_date_dt
-            , sell_end_date_dt
-            , discontinued_date_dt
-            , pk_product_sub_category
-            , sub_category_name
-            , fk_product_category
-            , pk_product_category
-            , name_product_category
-            , row_number() over (
-                partition by pk_product_category, pk_product_sub_category
-                order by pk_product
-            ) as row_num
-        from products_coalesce
-        qualify row_num = 1
-    )
-
 select *
-from deduplication
+from products_coalesce
