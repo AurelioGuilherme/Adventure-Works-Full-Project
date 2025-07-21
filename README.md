@@ -223,7 +223,7 @@ O usuário e senha padrão são "airflow" "airflow"
 A DAG: `Extract_raw_data_to_databricks` esta com um agendamento diário para as 00:00 UTC
 Porem é possivel executa-la apertando no botão `TRIGGER`
 
-![dag_1](dag_1.png)
+![dag_1](imgs/dag_1.png)
 
 ### 6. Transformações com o dbt
 
@@ -277,4 +277,4 @@ A documentação do dbt está disponível no seguinte link: [Documentação dbt]
 ![Gitflow](imgs/gitflow_v1.png)
 
 ## Gitflow V1 (Checkpoint 3) - Orquestração e Modelagem
-![Gitflow](imgs/gitflow_v2.png)
+![Gitflow2](imgs/gittflow_v2.png)
