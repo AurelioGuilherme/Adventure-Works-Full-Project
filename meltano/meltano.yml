@@ -41,12 +41,12 @@ plugins:
         records_path: $.data[*]
         schema: ./schemas/purchaseorderdetail.json
 
-      # Endpoint SalesOrderDetail
-      - name: salesorderdetail
-        path: /SalesOrderDetail
-        primary_keys: [SalesOrderDetailID]
-        records_path: $.data[*]
-        schema: ./schemas/salesorderdetail.json
+      # # Endpoint SalesOrderDetail
+      # - name: salesorderdetail
+      #   path: /SalesOrderDetail
+      #   primary_keys: [SalesOrderDetailID]
+      #   records_path: $.data[*]
+      #   schema: ./schemas/salesorderdetail.json
 
       # Endpoint SalesOrderHeader
       - name: salesorderheader

@@ -1,8 +1,8 @@
-# [LH20253] Checkpoint 2: Adventure Works - Infraestrutura e Ingestão
+# [LH20253] Adventure Works
 
-Este projeto consiste na construção de um pipeline de dados para extração de dados da **Adventure Works** de um banco de dados SQL Server e uma API Rest e o processo de ingestão no **Databricks** em tabelas Delta.
+Este projeto consiste na construção de uma infraestrutura moderna de dados da **Adventure Works** contendo o processo de extração dos dados de um banco de dados SQL Server e uma API Rest usando o **Meltano**, o processo de ingestão no **Databricks** em tabelas Delta com **Databricks CLI**, transformação dos dados usando **dbt** todo o processo deve ser orquestrado com o **airflow** (em construção, atualmente somente a extração e ingestão estão orquestradas)
 
-No projeto é contem a conteinerização com **Docker**, extração com **Meltano**, ingestão com **Databricks CLI** e transformação via workflow no **Databricks**.
+A documentação do dbt está disponível no seguinte link: [Documentação dbt](https://687c96d669f98dfac1922f28--merry-starship-171e7c.netlify.app/)
 
 **Pré-requisitos:**
 
@@ -12,27 +12,67 @@ No projeto é contem a conteinerização com **Docker**, extração com **Meltan
 - Acesso ao Databricks
 - Acesso ao banco de dados da Adventure Works
 - Acesso à API da Adventure Works
+- Python 3.10
 
 **Estrutura de pastas**
 
 ```shell
 aw-checkpoint2/
-├── .env.example                  # Exemplo das variáveis de ambiente utilizadas no projeto
-├── .gitignore                    # Define os arquivos e pastas ignorados pelo Git
-├── README.md                     # Documentação principal do projeto
-├── docker-compose.yml            # Pipeline de extração e ingestão usando Docker Compose
-├── meltano.yml                   # Arquivo de configuração do Meltano
-├── plugins/                      # Diretório contendo os plugins do Meltano
-│   ├── extractors/               # Configurações das taps (fontes de dados)
-│   └── loaders/                  # Configurações dos targets (destinos dos dados)
-├── Notebook/                     # Notebooks utilizados no Databricks
-│   └── convert_parquet_to_delta.ipynb  # Notebook para conversão de Parquet em Delta Table
-├── output/                       # Arquivos Parquet gerados após a extração
-└── schemas/                      # Schemas utilizados para validar os dados da API
-    ├── purchaseorderdetail.json
-    ├── purchaseorderheader.json
-    ├── salesorderdetail.json
-    └── salesorderheader.json
+
+└── config/                           # Pasta de configurações gerais do Airflow 
+    └──  airflow.cfg                  # Arquivo de configuração Airflow
+├── dags/                             # Pasta contendo as Dags para a orquestração usando o Airflow
+    ├── utils/                        # Funções customizadas para a orquestração
+        └── general_helpers.py        # Arquivo .py contendo as funções customizadas 
+    └── dag_extract_raw_data.py       # Arquivo .py contendo a Dag de extração e ingestão
+├── dbt/                              # Pasta contendo o projeto dbt para transformações dos dados
+    ├── aw_project_dbt/               # Projeto dbt
+        ├── analyses/        
+        ├── docs-dbt/                 # Arquivos para gerar a documentação do dbt
+        ├── logs/                     # Pasta de logs do dbt interna
+        └── macros/                   # Pasta contendo as macros
+            ├── custom_schema.sql          # Macro para customizar o nome da tabela gerada no DW
+            ├── not_negative_values.sql    # Macro contendo o test referente a valores negativos
+            └── test_due_date_after_order_date.sql  # Macro contendo o test referente a datas invalidas
+        ├── models/                   # Modelos de transformações dbt
+            ├── 1_staging/            # Pasta com os arquivos de transformações referente a camada staging
+            ├── 2_intermediate/       # Pasta com os arquivos de transformações referente a camada intermediate
+            └── 3_marts/              # Pasta com os arquivos de transformações referente a camada marts
+        ├── seeds/
+        ├── snapshots/                # Pasta com os arquivos necessários para a Snapshot
+            └── snp_status_sales.sql  # Snapshot de atualização de status de pedido
+        ├── tests/
+        ├── .env-example-dbt          # Arquivo de exemplo de .env para o dbt
+        ├── dbt_project.yml           # Arquivo de definição do projeto dbt
+        ├── package-lock.yml          # Arquivo de definição de dependencias do dbt
+        ├── packages.yml              # Arquivo de definição de dependencias do dbt
+        └── profiles.yml              # Arquivo de definição das variáveis de ambiente do dbt
+    └── logs/                         # Pasta de logs do dbt externa
+├── imgs/                             # Imagens usadas no read.me
+├── meltano/    
+    ├── .env.example-meltano          # Exemplo das variáveis de ambiente utilizadas no Meltano
+    ├── docker-compose.yml-legado     # Pipeline de extração e ingestão usando Docker Compose Checkpoint 2
+    ├── meltano.yml                   # Arquivo de configuração do Meltano
+    ├── plugins/                      # Diretório contendo os plugins do Meltano
+        ├── extractors/               # Configurações das taps (fontes de dados)
+        └── loaders/                  # Configurações dos targets (destinos dos dados)
+    ├── output/                       # Arquivos Parquet gerados após a extração caso feita de forma manual
+    └── catalogs/                     # Arquivos de discovery do Meltano
+        ├── catalog_tap_mssql.json          
+        └── catalog_tap_rest_api_msdk.json
+    └── schemas/                      # Schemas utilizados para validar os dados da API
+        ├── purchaseorderdetail.json
+        ├── purchaseorderheader.json
+        ├── salesorderdetail.json
+        └── salesorderheader.json
+├── Notebooks/                          # Notebooks utilizados no Databricks
+    └── convert_parquet_to_delta.ipynb  # Notebook para conversão de Parquet em Delta Table
+├── plugins/                            # Pasta para plugins do Airflow
+├── .env.example-airflow                # Arquivo contendo um exemplo de arquivo .env para o airflow
+├── docker-compose.yaml                 # Docker compose para o uso do Airflow
+├── README.md                           # Documentação principal do projeto
+└── requirements.txt                    # Arquivos de dependencias Python
+
 ```
 
 ## Arquitetura Geral do Projeto
@@ -44,23 +84,80 @@ aw-checkpoint2/
 
 ### 1. Instalação e Requisitos
 
-Clone o repositório
+Abra o  terminal de sua preferencia para executar os comandos abaixo
+- Para construção do projeto utilizei o terminal `Git Bash` no Windows,
+porem, não é uma dependencia, existe a possibilidade de que a execução de 
+alguns codigos podem mudar dependendo do SO.
+
+**Clone o repositório**
 ```bash
 git clone git@github.com:AurelioSilvaLH/aw-checkpoint2.git
 ```
 
-### 2. Configurar variáveis de ambiente
+**Vá para a pasta do projeto**
+```bash
+cd aw-checkpoint2
+```
 
-Faça uma cópia do arquivo `.env.example` e renomeie para `.env`:
+**Crie e ative um ambiente virtual Python**
 
 ```bash
-cp .env.example .env
+# crie a .venv
+python -m venv .venv
+
+# Windows
+source .venv/Scripts/activate
+
+# Linux
+source .venv/bin/activate
 ```
-Em seguida edite o arquivo .env preenchendo com as credenciais necessárias para:
+**Instale as bibliotecas python necessárias**
+
+```bash
+pip install -r requirements.txt
+```
+
+
+### 2. Configurar variáveis de ambiente
+
+⚠️ Existem **3** arquivos em que são necessários configurar as variáveis de ambiente.
+
+* `.env.example-meltano`
+* `.env.example-dbt`  
+* `.env.example-airflow`  
+
+É necessário fazer uma cópia dos arquivos `.env.example` e renomeie para `.env` dentro de suas respectivas pastas.
+
+É possivel efetuar esse processo via terminal, porem é preciso cautela para garantir a criação correta dos arquivos
+
+```bash
+# .env airflow
+cp .env.example-airflow .env
+
+# .env meltano
+cd meltano
+cp .env.example-meltano .env
+
+# Retornar para a pasta principal
+cd ..
+
+# .env dbt
+cd dbt
+cd aw_project_dbt
+cp .env.example-dbt .env
+```
+
+Em seguida edite todos os arquivos .env criados preenchendo com 
+as credenciais necessárias para:
 - Acesso ao banco de dados SQL Server
 - Acesso à API 
 - Configurações de acesso do Databricks CLI.
+- MELTANO_PROJECT_HOST_PATH: Caminho completo para a pasta do Meltano do projeto
+- Para obter o AIRFLOW_UID=uid você pode executar o comando após iniciar o Airflow.
 
+```bash
+ echo -e "AIRFLOW_UID=$(id -u)" 
+```
 ⚠️ Caso não possua um token do Databricks, gere um novo acessando: 
 
 Menu superior direito no Databricks (seu usuário) →  Settings 
@@ -89,33 +186,84 @@ Job runs → Create job:
 
 → Clique em Create task
 
-4 - Copie o Job ID criado na task e adicione-o no arquivo .env no campo:
+4 - Copie o Job ID criado na task e adicione-o no arquivo .env do Airflow no campo:
 
 ```
 DATABRICKS_JOB_ID=seu_job_id
 ```
 5 - Crie uma pasta com nome **`raw`** dentro do seu schema no Databricks. Essa pasta será utilizada para armazenar os arquivos Parquet extraídos antes da conversão para Delta Table.
 
-### 4. Executar o Pipeline
+### 4. Iniciar o Airflow
 
 Esteja com o terminal apontado para a pasta **aw-checkpoint2**
 
 ```bash
  cd aw-checkpoint2
 ```
-Com todas as configurações realizadas, execute o pipeline completo:
+Com todas as configurações realizadas, execute o pipeline de extração:
 ```bash
-docker-compose up
+# Inicie o Airflow
+docker compose up airflow-init
+
+# Suba os Airflow para o localhost
+docker-compose up -d
 ```
 
-**Este comando irá:**
+**Estes comando irá:**
 
 1 - Baixar as imagens Docker necessárias
 2 - Construir os containers necessários
-3 - Executar o Meltano para extrair dados do banco de dados SQL Server e API
-4 - Salvar os dados em formato Parquet na pasta output/
-5 - Fazer upload dos arquivos para o Databricks com CLI
-6 - Executar o job do Databricks para converter para Delta Tables
+3 - Executar as instações necessárias para o Airflow
+
+Acesse o Airflow em seu localhost: http://localhost:8080/
+O usuário e senha padrão são "airflow" "airflow"
+
+### 5. Dags
+
+A DAG: `Extract_raw_data_to_databricks` esta com um agendamento diário para as 00:00 UTC
+Porem é possivel executa-la apertando no botão `TRIGGER`
+
+![dag_1](dag_1.png)
+
+### 6. Transformações com o dbt
+
+Para executar o projeto dbt seguir os seguintes comandos.
+
+Esteja com o terminal apontado para a pasta **aw_project_dbt**
+
+```bash
+# Pasta dbt
+ cd dbt
+
+# Pasta aw_project_dbt
+ cd aw_project_dbt
+```
+Verifique se as configurações de acesso estão devidamente configuradas no .env respectivo do dbt
+
+```bash
+ dbt debug
+```
+
+Instale as dependencias do dbt (packages)
+```bash
+# Instale as dependencias
+dbt deps
+```
+
+Execute os modelos
+```bash
+# Executar todos os modelos
+dbt run
+
+# Executar um modelo especifico
+dbt run -s nome_do_modelo
+```
+Execute os testes configurados
+```bash
+dbt test
+```
+A documentação do dbt está disponível no seguinte link: [Documentação dbt](https://687c96d669f98dfac1922f28--merry-starship-171e7c.netlify.app/)
+
 
 ## Para futuros desenvolvimentos
 
@@ -124,6 +272,9 @@ docker-compose up
 * Push para a branch (git push origin feature/nova-feature)
 * Abra um Pull Request
 
-## Gitflow
+## Gitflow V1 (Checkpoint 2) - Extração e Ingestão
 
-![Gitflow](imgs/gitflow.png)
+![Gitflow](imgs/gitflow_v1.png)
+
+## Gitflow V1 (Checkpoint 3) - Orquestração e Modelagem
+![Gitflow](imgs/gitflow_v2.png)
