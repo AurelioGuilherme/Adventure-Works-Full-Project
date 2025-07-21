@@ -272,9 +272,9 @@ A documentação do dbt está disponível no seguinte link: [Documentação dbt]
 * Push para a branch (git push origin feature/nova-feature)
 * Abra um Pull Request
 
-## Gitflow V1 (Checkpoint 2) - Extração e Ingestão
+## Gitflow V (Checkpoint 2) - Extração e Ingestão
 
 ![Gitflow](imgs/gitflow_v1.png)
 
-## Gitflow V1 (Checkpoint 3) - Orquestração e Modelagem
+## Gitflow V2 (Checkpoint 3) - Orquestração e Modelagem
 ![Gitflow2](imgs/gittflow_v2.png)
