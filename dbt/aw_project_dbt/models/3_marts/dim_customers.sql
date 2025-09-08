@@ -10,6 +10,7 @@ with
             , middle_name
             , last_name
             , email_promotion
+            , name_store
         from {{ ref('int_customers_details') }}
         where person_type in ('IN', 'SC')
     )
@@ -37,6 +38,19 @@ with
         from {{ ref('int_territory') }}
     )
 
+    , last_purchase as (
+        select 
+            fk_customer
+            , max(order_date_dt) as last_order_date
+        from {{ ref('int_orders')}}
+        group by fk_customer
+    )
+
+    , max_sale_date as (
+        select max(order_date_dt) as max_order_date
+        from {{ ref('int_orders') }}
+    )
+
     , fact_customers as (
         select
             customer.pk_customer 
@@ -48,6 +62,7 @@ with
             , customer.last_name
             , customer.name_style
             , customer.email_promotion
+            , customer.name_store
 
             -- Nome completo
             , case
@@ -70,6 +85,27 @@ with
             on person_address.fk_address = territory.pk_address
     )
 
+    , purchase_count as (
+        select
+            fk_customer
+            , count(distinct pk_sales_order) as total_orders
+        from {{ ref('int_orders') }}
+        group by fk_customer
+    ) 
+
+    , customer_with_last_purchase as (
+            select
+                fc.*
+                , lp.last_order_date
+                , datediff(day, lp.last_order_date, msd.max_order_date) as days_since_last_purchase
+                , pc.total_orders
+            from fact_customers fc
+            left join last_purchase lp on fc.pk_customer = lp.fk_customer
+            left join purchase_count pc on fc.pk_customer = pc.fk_customer
+            cross join max_sale_date as msd
+    )
+
+
     -- adicionando chave surrogada
     , generate_sk as (
         select
@@ -86,13 +122,42 @@ with
                   , last_name
                   , name_style
                   , email_promotion
+                  , name_store
+                  , case
+                        when email_promotion = 0 then 'Não Optante'
+                        when email_promotion = 1 then 'Optante AW'
+                        when email_promotion = 2 then 'Optante AW + Parceiros'
+                        else 'Desconhecido'
+                    end as email_promotion_description
                   , full_name
                   , territory_name
                   , country_code
                   , territory_group
                   , name_state_province
                   , city
-        from fact_customers
+                  , last_order_date
+                  , days_since_last_purchase
+                  , case
+                        when days_since_last_purchase <= 30 then '0-30 dias'
+                        when days_since_last_purchase <= 60 then '31-60 dias'
+                        when days_since_last_purchase <= 90 then '61-90 dias'
+                        when days_since_last_purchase <= 120 then '91-120 dias'
+                        when days_since_last_purchase <= 150 then '121-150 dias'
+                        when days_since_last_purchase <= 200 then '151-200 dias'
+                        when days_since_last_purchase <= 360 then '201-360 dias'
+                        when days_since_last_purchase > 360 then 'Mais de 360 dias'
+                        else 'Sem registro de compra'
+                  end as purchase_recency_class
+                  , case
+                        when total_orders = 1 then true
+                        else false
+                    end as bought_once
+                  , case
+                        when bought_once = True then 'Compra única'
+                        else 'Recorrente'
+                    end as bought_once_description
+
+        from customer_with_last_purchase
     )
 
 select *

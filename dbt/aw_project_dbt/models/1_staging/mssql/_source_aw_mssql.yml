@@ -42,6 +42,9 @@ sources:
       - name: delta_raw_db_data_purchasing_shipmethod
         description: "Métodos de envio utilizados na base de compras."
 
+      - name: delta_raw_db_data_sales_store
+        description: "Informações das lojas."
+
       # Tabelas para Fato Estoque de Produtos
       - name: delta_raw_db_data_production_transactionhistory
         description: "Histórico de movimentações de estoque."

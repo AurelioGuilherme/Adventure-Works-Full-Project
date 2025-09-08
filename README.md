@@ -1,6 +1,8 @@
 # [LH20253] Adventure Works
 
-Este projeto consiste na construção de uma infraestrutura moderna de dados da **Adventure Works** contendo o processo de extração dos dados de um banco de dados SQL Server e uma API Rest usando o **Meltano**, o processo de ingestão no **Databricks** em tabelas Delta com **Databricks CLI**, transformação dos dados usando **dbt** todo o processo deve ser orquestrado com o **airflow** (em construção, atualmente somente a extração e ingestão estão orquestradas)
+Este projeto consiste na construção de uma infraestrutura moderna de dados da **Adventure Works** contendo o processo de extração dos dados de um banco de dados SQL Server e uma API Rest usando o **Meltano**, o processo de ingestão no **Databricks** em tabelas Delta com **Databricks CLI**, transformação dos dados usando **dbt** todo o processo deve ser orquestrado com o **airflow** (em construção, atualmente somente a extração e ingestão estão orquestradas).
+
+Os requisitos de execução do Notebook estão listados no requirements.txt, a solução atual não necessita do uso de GPU.
 
 A documentação do dbt está disponível no seguinte link: [Documentação dbt](https://687c96d669f98dfac1922f28--merry-starship-171e7c.netlify.app/)
 
@@ -238,6 +240,12 @@ Esteja com o terminal apontado para a pasta **aw_project_dbt**
 # Pasta aw_project_dbt
  cd aw_project_dbt
 ```
+
+Inclua as variáveis de ambiente para o dbt.
+
+```bash
+export $(cat .env | xargs)
+```
 Verifique se as configurações de acesso estão devidamente configuradas no .env respectivo do dbt
 
 ```bash
@@ -263,6 +271,18 @@ Execute os testes configurados
 dbt test
 ```
 A documentação do dbt está disponível no seguinte link: [Documentação dbt](https://687c96d669f98dfac1922f28--merry-starship-171e7c.netlify.app/)
+
+
+## Previsão de Demanda
+A previsão de demanda foi incluida, contendo todo o desenvolvimento no notebook `Forecasting_Adventure_Works.ipynb`.
+
+Para execução é necessário executar todo o passo a passo abaixo listado no README, onde incluirá a toda orquestração e transformação dos dados até a camada marts no Databricks.
+
+O notebook acessa as variáveis de ambiente definidas na .venv, portanto é necessário executar o seguinte código no terminal para a definição de variáveis de ambiente que estão no arquivo .env na pasta raiz.
+
+```shell
+source .env
+```
 
 
 ## Para futuros desenvolvimentos

@@ -12,3 +12,5 @@ __pycache__
 !/config/.gitkeep
 dbt/logs/dbt.log
 dbt/aw_project_dbt/.user.yml
+
+.databricks
