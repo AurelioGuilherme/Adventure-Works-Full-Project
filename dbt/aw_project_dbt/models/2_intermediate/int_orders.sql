@@ -45,18 +45,23 @@ with
             , oh.fk_territory_sales
             , oh.fk_credit_card
             , oh.online_order_flag
+            , case
+                when oh.online_order_flag = True then 'Online'
+                when oh.online_order_flag = False then 'Loja Física'
+                else 'Não Especificado'
+              end as online_order_flag_description
             , oh.order_date_dt
             , oh.ship_date_dt
             , oh.due_date_dt
             , oh.sales_status
             , case oh.sales_status
-                when 1 then 'in process'
-                when 2 then 'approved'
-                when 3 then 'backordered'
-                when 4 then 'rejected'
-                when 5 then 'shipped'
-                when 6 then 'cancelled'
-                else 'unknown'
+                when 1 then 'Em processamento'
+                when 2 then 'Aprovado'
+                when 3 then 'Em espera'
+                when 4 then 'Reijeitado'
+                when 5 then 'Enviado'
+                when 6 then 'Cancelado'
+                else 'Desconhecido'
               end as status_name
             , od.unit_price
             , od.unit_price_discount

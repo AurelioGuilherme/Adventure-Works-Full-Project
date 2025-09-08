@@ -238,6 +238,12 @@ Esteja com o terminal apontado para a pasta **aw_project_dbt**
 # Pasta aw_project_dbt
  cd aw_project_dbt
 ```
+
+Inclua as variáveis de ambiente.
+
+```bash
+export $(cat .env | xargs)
+```
 Verifique se as configurações de acesso estão devidamente configuradas no .env respectivo do dbt
 
 ```bash
