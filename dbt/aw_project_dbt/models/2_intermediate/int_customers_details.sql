@@ -22,6 +22,14 @@ with
         from {{ ref('stg_mssql__person') }}
     )
 
+    , store as (
+        SELECT
+            pk_store
+            , name_store
+        FROM {{ ref('stg_mssql__store') }}
+
+    )
+
     , customers_details as (
         select
             customers.pk_customer
@@ -36,9 +44,13 @@ with
             , person.last_name
             , person.suffix
             , person.email_promotion
+            , store.pk_store
+            , store.name_store
         from customers
         inner join person
             on customers.fk_person = person.pk_person
+        inner join store
+            on customers.fk_store = store.pk_store
     )
 
 select *

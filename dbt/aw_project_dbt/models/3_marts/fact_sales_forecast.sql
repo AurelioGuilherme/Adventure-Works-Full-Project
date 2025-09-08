@@ -1,3 +1,4 @@
+
 with 
     orders as (
         select  
@@ -7,7 +8,6 @@ with
             , fk_customer
             , fk_vendor
             , fk_ship_to_address
-            , fk_ship_method
             , pk_sales_order
             , fk_territory_sales
             , fk_credit_card
@@ -72,43 +72,6 @@ with
         from {{ ref('dim_address') }}
     )
 
-    , vendor as (
-        select  
-            pk_vendor
-            , full_name as vendor_full_name
-            , commission_sales_pct
-        from {{ ref('dim_vendor') }}
-    )
-
-    , ship_method as (
-        select  
-            pk_ship_method
-            , shipping_name
-        from {{ ref('dim_ship_method') }}
-    )
-
-    , credit_card as (
-        select  
-            pk_credit_card
-            , card_type
-        from {{ ref('stg_mssql__sales_credit_card') }}
-    )
-
-    , reason_header as (
-        select
-            fk_sales_order
-            , fk_sales_reason
-        from {{ ref('stg_mssql__sales_reason_header') }}
-
-    )
-
-    , reason as (
-        select  
-            fk_sales_reason
-            , reason_name
-            , reason_type
-        from {{ ref('dim_reason') }}
-    )
 
     , dim_dates as (
         select 
@@ -120,7 +83,7 @@ with
         from {{ ref('dim_dates') }}
     )
 
-    , join_fact_sales as (
+    , join_fact_sales_forecast as (
         select
             -- Chaves surrogadas e ids
             orders.pk_sales_order_detail
@@ -128,10 +91,7 @@ with
             , orders.pk_sales_order
             , customer.pk_customer
             , product.pk_product
-            , vendor.pk_vendor
             , address_customer.pk_address
-            , ship_method.pk_ship_method
-            , reason.fk_sales_reason
             , orders.fk_sales_order
             , orders.fk_credit_card
 
@@ -159,7 +119,6 @@ with
             , orders.sales_tax_amt
             , orders.sales_freight
             , orders.total_due
-            , vendor.commission_sales_pct
 
             -- Descritivos
             , customer.customer_full_name
@@ -174,8 +133,6 @@ with
             , product.gender_category_description
             , product.is_manufactured
             , product.margin_amount
-            , vendor.vendor_full_name
-            , ship_method.shipping_name
             , address_customer.full_address
             , address_customer.city
             , address_customer.territory_name
@@ -184,9 +141,6 @@ with
             , address_customer.country_region_code
             , address_customer.country_code
             , address_customer.territory_group
-            , COALESCE(credit_card.card_type, 'Outro Metodo de Pagamento') as payment_method
-            , COALESCE(reason.reason_name, 'Não especificado') as reason_name
-            , COALESCE(reason.reason_type, 'Não especificado') as reason_type
 
         from orders
         left join product
@@ -198,24 +152,9 @@ with
         left join address_customer
             on orders.fk_ship_to_address = address_customer.pk_address
 
-        left join vendor
-            on orders.fk_vendor = vendor.pk_vendor
-
-        left join ship_method
-            on orders.fk_ship_method = ship_method.pk_ship_method
-
-        left join credit_card 
-            on orders.fk_credit_card = credit_card.pk_credit_card
-
-        left join reason_header
-            on orders.fk_sales_order = reason_header.fk_sales_order
-            
-        left join reason
-            on reason_header.fk_sales_reason = reason.fk_sales_reason
-
         left join dim_dates as dt
             on orders.due_date_dt = dt.date_day
     )
 
 select *
-from join_fact_sales
+from join_fact_sales_forecast
