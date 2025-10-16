@@ -1,4 +1,4 @@
-# [LH20253] Adventure Works
+# [LH20253] Adventure Works 
 
 Este projeto consiste na construção de uma infraestrutura moderna de dados da **Adventure Works** contendo o processo de extração dos dados de um banco de dados SQL Server e uma API Rest usando o **Meltano**, o processo de ingestão no **Databricks** em tabelas Delta com **Databricks CLI**, transformação dos dados usando **dbt** todo o processo deve ser orquestrado com o **airflow** (em construção, atualmente somente a extração e ingestão estão orquestradas).
 
